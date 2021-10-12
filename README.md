@@ -1,6 +1,15 @@
-# ptut_game
+# PTUT Project
 
-PTuTGames
+Etudiants :
+  - DESHORS Théo
+  - GIBELOT Mael
+  - TEODORESCO Pierre
+  - SYMPHORIEN Mathieu
+  - SEIGNOBOS Louis
+  - WROBEL Nicolas
+
+Tuteur : 
+  - CASALI Alain
 
 ## Getting Started
 
