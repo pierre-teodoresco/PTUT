@@ -1,0 +1,401 @@
+[
+  {
+    "name": "NAME",
+    "description": "DESCRIPTION A METTRE",
+    "type": "1",
+    "effect": [
+      "removepoint-1",
+      "ECRIRE LA DESCRIPTION DE L'EFFECT"
+    ]
+  },
+
+  {
+    "name": "HEURE DE PERMIS",
+    "description": "Daniel vous attend dans sa voiture, lumière tamisé. Vous passez vos meileurs heures de conduite à papoter de Politique. Comme vous, Daniel adore Patrick Sebastien, un délice.",
+    "type": "1",
+    "effect": [
+      "addpoint-2",
+      "Vous gagnez 2 points."
+    ]
+  },
+
+  {
+    "name": "VERBE IRREGULIER",
+    "description": "Vous apprenez vos verbes irrégulier en anglais. Votre voyage en Angleterre se passe à merveille car vous pouvez vous exprimer correctement.",
+    "type": "1",
+    "effect": [
+      "addpoint-1",
+      "Vous gagnez 1 point"
+    ]
+  },
+
+  {
+    "name": "BIEN MANGE",
+    "description": "Vous avez raté votre petit dejeuné et vous passé la maitiné à travailler. Vous vous servez 2 assiettes et êtes en forme toute l'aprem. Vous gagner 2 points !",
+    "type": "1",
+    "effect": [
+      "addpoint-2",
+      "Vous gagnez 2 points"
+    ]
+  },
+
+  {
+    "name": "SERIEUX",
+    "description": "Pas un bruit, premier rang",
+    "type": "1",
+    "effect": [
+      "addpoint-1",
+      "+1 point"
+    ]
+  },
+
+  {
+    "name": "CORRIGER LA PROF",
+    "description": "En tant que bon elève, vous suivez attentivement le cours et remarquer L'ENORME erreur du prof. Bien vu champion.",
+    "type": "1",
+    "effect": [
+      "addpoint-1",
+      "Vous gagnez 1 point."
+    ]
+  },
+
+  {
+    "name": "GLAND DE LAIT",
+    "description": "Dent de lait, gland de lait, vous vous sentez revigoré.",
+    "type": "1",
+    "effect": [
+      "addpoint-1",
+      "Vous gagnez 1 point."
+    ]
+  },
+
+  {
+    "name": "WHERE IS BRYAN ?",
+    "description": "In the kitchen",
+    "type": "1",
+    "effect": [
+      "removepoint-5",
+      "Vous perdez 5 points"
+    ]
+  },
+
+  {
+    "name": "TACLE ASSASSIN",
+    "description": "Une grande carrière vous attendez mais ligament croisé vous connaissez.",
+    "type": "1",
+    "effect": [
+      "removepoint-1",
+      "Vous perdez 1 point et un genoux"
+    ]
+  },
+
+  {
+    "name": "HANDBALL IN THE BALLS",
+    "description": "Ca fait mal. Vous attendrissez les filles.",
+    "type": "1",
+    "effect": [
+      "addpoint-1",
+      "Vous perdez 1 boule et vous gagnez 1 point."
+    ]
+  },
+
+  {
+    "name": "FOND DE LA CLASSE",
+    "description": "Mohamed, Meddy et Abdoul   vous aide à developper votre busisness. Vous finissez l'année riche et heureux.",
+    "type": "1",
+    "effect": [
+      "addpoint+3",
+      "Gagner 3 points"
+    ]
+  },
+
+  {
+    "name": "faire un bide",
+    "description": "Vous êtes visiblement adepte de la blague de trop. Même votre meilleur ami ne vous a pas suivi sur celle-ci.",
+    "type": "1",
+    "effect": [
+      "removepoint-2",
+      "Vous perdez 2 points."
+    ]
+  },
+
+  {
+    "name": "fond de la classe",
+    "description": "2h de maths suivit de 2h de physique le tout combiné avec une toux et de la fièvre. La delicatesse d'un bon début de semaine. Moins 1 points.",
+    "type": "1",
+    "effect": [
+      "removepoint-1",
+      " Vous perdez 1 points"
+    ]
+  },
+
+  {
+    "name": "SE FAIRE CLASHER PAR LA PROF",
+    "description": "Vous avez l'esprit taquin aujourd'hui, malheuresement pour vous, le prof est aussi en forme. ",
+    "type": "1",
+    "effect": [
+      "removepoint-4",
+      "Vous subissez une masterclasse et perdez 4 points."
+    ]
+  },
+
+  {
+    "name": "RADIATEUR EN HIVER",
+    "description": "L'hiver est arrivé et vous habitez dans le nord. Après un combat sanglant avec vos camarades, vous pouvez calinner le saint chauffage.",
+    "type": "1",
+    "effect": [
+      "addpoint-2",
+      "Vous gagnez 2 points"
+    ]
+  },
+
+  {
+    "name": "OUBLIER LE DEO",
+    "description": "Apparement vous sentez le facochère.",
+    "type": "1",
+    "effect": [
+      "removepoint-2",
+      "Vous perdez 2 points."
+    ]
+  },
+
+  {
+    "name": "PERIODE EMO",
+    "description": "Faut-il vraiment dire pourquoi.. ?",
+    "type": "1",
+    "effect": [
+      "removepoint-2",
+      "Vous perdez 2 points"
+    ]
+  },
+
+  {
+    "name": "ADDICTION",
+    "description": "Classique mais malheureux. Les ranked en silver vous bouffent votre temps. Vous ne voyez plus vos amis. Vous ne mangez plus avec votre famille. Vous ne dormez plus.",
+    "type": "1",
+    "effect": [
+      "removepoint-3",
+      "Vous perdez logiquement un bon 3 points."
+    ]
+  },
+
+  {
+    "name": "EX TOXIQUE",
+    "description": "La fille avec qui vous êtes restés pendant deux ans au collège vient vous voir à la sortie du lycée. Tous les soirs. Pendant 2 mois.",
+    "type": "1",
+    "effect": [
+      "removepoint-3",
+      "Vous perdez 3 points. "
+    ]
+  },
+
+  {
+    "name": "parler pendant les blancs",
+    "description": "Avouer vos bords politiques tandancieux pendant un blanc n'était pas votre meilleure idée.",
+    "type": "1",
+    "effect": [
+      "removepoint-3",
+      "Vous perdez 3 points."
+    ]
+  },
+
+  {
+    "name": "FARINE ANNIVERSAIRE",
+    "description": "C'est votre anniversaire, vous espériez que tout le monde l'avait oublié.. Vous n'avez jamais été aussi blanc.",
+    "type": "1",
+    "effect": [
+      "removepoint-3",
+      "Perdez 3 points"
+    ]
+  },
+
+  {
+    "name": "vous n'avez pas de mouchoirs",
+    "description": "Vous ne connaissez que trop bien les chutes du Niagara maintenant. ",
+    "type": "1",
+    "effect": [
+      "removepoint-2",
+      "Vous perdez 2 points."
+    ]
+  },
+
+  {
+    "name": "hamburger frite a la cantine",
+    "description": "Vous débarquez à la cantine et voyez des bigs burgers qui vous attendent bien sagement. Vous arrivez tous à vous à en manger au moins 3. ",
+    "type": "1",
+    "effect": [
+      "addpointall-2",
+      "Gagnez 2 points. "
+    ]
+  },
+
+  {
+    "name": "CARTOUCHE QUI FUIT DANS LA TROUSSE",
+    "description": "Rien à dire de plus.",
+    "type": "1",
+    "effect": [
+      "removepoint-1",
+      " Vous perdez 1 point. "
+    ]
+  },
+
+  {
+    "name": "RATEAU",
+    "description": "Dans le couloir, dans la salle d'histoire, dans la cour. Vous ne pouvez vous empêcher de regarder la belle Cassandra. Vous décidez un matin de lui avouer vos sentiments. Elle refuse avec politesse. Vous êtes triste.",
+    "type": "1",
+    "effect": [
+      "removepoint-3",
+      "Moins 3 points."
+    ]
+  },
+
+  {
+    "name": "ALARME INCENDIE",
+    "description": "Quel dommage, l'alarme sonne en plein ds surprise, le peuple est sauvé.",
+    "type": "1",
+    "effect": [
+      "addpointall-1",
+      "Plus 2 points général"
+    ]
+  },
+
+  {
+    "name": "DS SAMEDI MATIN",
+    "description": "Au lieu de réviser, vous avez consacré votre vendredi soir au seigneur des anneaux version longue. Vous rattrapez votre sommeil sur le partiel du lendemain matin.",
+    "type": "1",
+    "effect": [
+      "removepointall-3",
+      "Perdez 3 points. "
+    ]
+  },
+
+  {
+    "name": "PET FOIREUX",
+    "description": "Tu sais, nous savons.",
+    "type": "1",
+    "effect": [
+      "removepoint-2",
+      "Vous perdez 2 points, et un slip."
+    ]
+  },
+
+  {
+    "name": "prof_absent",
+    "description": "Ca fait 15 minutes non ? tout le monde sort heureux, votre journée est refaite.",
+    "type": "1",
+    "effect": [
+      "addpointall-2",
+      "Vous gagnez tous 2 points ."
+    ]
+  },
+
+  {
+    "name": "BLOCUS",
+    "description": "\"NON NON OUI OUI, PLUS DE FRITES A LA CANTINE\" : telles sont les revendication des lycéens en colère qui manifestent. Ils boquent l'accès aux profs, vous n'avez pas cours.",
+    "type": "1",
+    "effect": [
+      "addpointall-2",
+      "Vous gagnez 2 points."
+    ]
+  },
+
+  {
+    "name": "EDUCATION SEXUELLE",
+    "description": "La SVT c'est pas passionant quand ça parle de cailloux mais alors quand ça parle de ***. Là on est content !",
+    "type": "1",
+    "effect": [
+      "addpointall-2",
+      "Plus 3 points"
+    ]
+  },
+
+  {
+    "name": "PLUS DE PQ DANS LES CHIOTTES",
+    "description": "Les devoirs de philo auront servit à quelque chose au moins.",
+    "type": "1",
+    "effect": [
+      "removepointall-1",
+      "Vous perdez tous 1 points."
+    ]
+  },
+
+  {
+    "name": "il pleut.",
+    "description": "Dommage",
+    "type": "1",
+    "effect": [
+      "removepointall-1",
+      "Tout le monde perd 1 point "
+    ]
+  },
+
+  {
+    "name": "MENU DEGUEULASSE A LA CANTINE",
+    "description": "Rien ne vaut le brocoli-poisson pas cuit après un dur ds de maths de 4h.",
+    "type": "1",
+    "effect": [
+      "removepointall-2",
+      " Tout le monde perd 2 points. "
+    ]
+  },
+
+  {
+    "name": "CONTROLE SURPRISE",
+    "description": "Le prof a très mal dormi cette nuit. La classe subit son courroux.",
+    "type": "1",
+    "effect": [
+      "removepointall-2",
+      "Vous perdez tous 2 points."
+    ]
+  },
+
+  {
+    "name": "PROF UN PEU TROP SYMPA",
+    "description": "On l'a tous eu ce prof non ? La carte dit tout il est vraiment beaucoup trop sympa. Les cours passent vite mais vous faites pas grand chose.",
+    "type": "1",
+    "effect": [
+      "removepointall-2",
+      "Vous perdez tous 2 points"
+    ]
+  },
+
+  {
+    "name": "3x500",
+    "description": "Votre VO2 max ne dépasse pas les 10. Cependant, le prof ne l'a pas remarqué.",
+    "type": "1",
+    "effect": [
+      "removepointall-1",
+      "Perdez  1 point."
+    ]
+  },
+
+  {
+    "name": "GASTRO",
+    "description": "Elle frappe sans prévenir, elle vous vient directement de roberto, un homme pas très propre qui vous refile sa gastro.",
+    "type": "1",
+    "effect": [
+      "addpoint-2",
+      " Points positif, vous évitez le cours de sport et gagner 2 points !"
+    ]
+  },
+
+  {
+    "name": "EXPOSE",
+    "description": " Ah ? On avait un exposé.",
+    "type": "1",
+    "effect": [
+      "removepoint-3",
+      "Vous perdez 3 points !"
+    ]
+  },
+
+  {
+    "name": "EXPOSE",
+    "description": " Ah ? On avait un exposé.",
+    "type": "1",
+    "effect": [
+      "removepoint-3",
+      "Vous perdez 3 points !"
+    ]
+  }
+]

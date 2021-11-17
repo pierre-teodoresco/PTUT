@@ -1,0 +1,24 @@
+"effect": [
+//Pour enlever des points
+   "removepoint-1",
+
+//Pour ajouter des points
+   "addpoint-1",
+
+//Pour enlever des case
+   "removecase-1",
+
+//Pour ajouter des cases
+   "addcase-1",
+
+//Pour ajouter des points à tout le monde
+   "addpointall-1"
+
+//Pour retirer des points à tout le monde
+   "removepointall-1"
+
+"ECRIRE LA DESCRIPTION DE L'EFFECT"
+   "BLAHBLAHNLAHBLA",
+
+
+]

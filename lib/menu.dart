@@ -38,7 +38,7 @@ class MainMenu extends StatelessWidget{
                   top: 30,
                   bottom: 20,
                 ),
-                child: Text('Application réalisée pour le PTut S3-S3',
+                child: Text('Application réalisée pour le PTut S3-S3 ',
                   textAlign: TextAlign.center, 
                   style: GoogleFonts.poppins(
                       color: Colors.grey,
@@ -96,7 +96,7 @@ class MainMenu extends StatelessWidget{
                   ),
                   child: Text('Options'),
                   onPressed: () {
-                    print("Ta darone");
+                    print("Nombre de carte recup : ");
                         },
                 ),
               ),

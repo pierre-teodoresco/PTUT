@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:ptut_game/delayed_animation.dart';
+import 'package:ptut_game/cards/cardobject.dart';
 import 'package:ptut_game/menu.dart';
 const d_red = const Color(0xFFE98170);
 
 void main() {
+  //List<Cardobject> cardlist = cardobjectFromJson("cards/cards.json");
+  //print(cardlist.toString());
   runApp(MyApp());
 }
 
