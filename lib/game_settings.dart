@@ -2,17 +2,22 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ptut_game/abstract/a_card.dart';
 import 'package:ptut_game/delayed_animation.dart';
 import 'package:ptut_game/main.dart';
+import 'package:ptut_game/scheduler/player.dart';
 
 class GameMenuSettings extends State<GameMenuSettingsState>{
 
+  static List<player> playerList = [];
   int nbruser = 4;
   int nbusermax = 6;
   int nbusermin = 2;
   String errormsg = "";
   List<TextEditingController> controllers= [];
-  HashMap test = new HashMap<TextEditingController, TextFormField>();
+  List<TextField> textList = [];
+
+  HashMap test = new HashMap<TextEditingController, TextField>();
   void _incrementCount(){
     setState(() {
       if(nbruser == nbusermax) return;
@@ -28,11 +33,14 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
 
 
   void checkButton(){
-    var entryList = test.entries.toList();
-    for(int i = 0; i < entryList.length; i++){
-      TextFormField tf = entryList[i].value;
-      tf.createState().validate();
+    for(int i =0; i< controllers.length; i++){
+      playerList.add(new player(controllers[i].text, 0, new List<a_card>.empty()));
+      print(controllers[i].text);
     }
+
+    print(playerList.toString());
+    print(playerList[1].getName());
+
   }
   @override
   Widget build(BuildContext contect){
@@ -55,7 +63,7 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
                 DelayedAnimation(
                   delay: 1500,
                   child: Container(
-                    margin: EdgeInsets.only(
+                    margin: const EdgeInsets.only(
                       top: 30,
                       bottom: 20,
                     ),
@@ -134,18 +142,14 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
     childs.add(Text(errormsg));
     for (var i = 1; i < nbu+1; i++) {
       childs.add(Text('Nom utilisateur : $i'));
-      TextFormField textf = TextFormField(
+      TextField textf = TextField(
         controller: controllers[i],
         decoration: InputDecoration(
           hintText: "Pseudo"
         ),
-        validator: (text){
-          if( text == null || text.isEmpty ){
-            return "Merci d'entrer une valeur";
-          }
-        },
       );
       test.putIfAbsent(controllers[i], () => textf);
+      textList.add(textf);
       childs.add(textf);
     }
     return childs;

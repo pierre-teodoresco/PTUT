@@ -1,36 +1,44 @@
 import 'package:ptut_game/abstract/a_card.dart';
 
 class player {
-  String _name;
-  int _point;
-  List<a_card> _cards;
 
-  player(this._name, this._point, this._cards);
+  late String name;
+  late int point;
+  late List<a_card> cardList;
 
-  String get name => _name;
-
-  set name(String str) {
-    _name = str;
+  player(String name, int point, List<a_card> cardList) {
+    this.name = name;
+    this.point = point;
+    this.cardList = cardList;
   }
 
-  void addCard(a_card card) {
-    this._cards.add(card);
+  String getName() {
+    return name;
   }
 
-  void addPoint(int point) {
-    this._point += point;
+  void setName(String name) {
+    this.name = name;
   }
 
-  int get point => _point;
-
-  set point(int value) {
-    _point = value;
+  int getPoint() {
+    return point;
   }
 
-  List<a_card> get cards => _cards;
+  void setPoint(int point) {
+    this.point = point;
+  }
 
-  set cards(List<a_card> value) {
-    _cards = value;
+  List<a_card> getCardList() {
+    return cardList;
+  }
+
+  void setCardList(List<a_card> cardList) {
+    this.cardList = cardList;
+  }
+
+  @override
+  String toString() {
+    return "(name: $name, point: $point, cards: $cardList)";
   }
 
 }
