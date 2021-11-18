@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ptut_game/abstract/a_card.dart';
 import 'package:ptut_game/delayed_animation.dart';
+import 'package:ptut_game/game.dart';
 import 'package:ptut_game/main.dart';
 import 'package:ptut_game/scheduler/player.dart';
 
@@ -11,11 +12,11 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
 
   static List<player> playerList = [];
   int nbruser = 4;
-  int nbusermax = 6;
-  int nbusermin = 2;
+  final int nbusermax = 6;
+  final int nbusermin = 2;
+
   String errormsg = "";
   List<TextEditingController> controllers= [];
-  List<TextField> textList = [];
 
   HashMap test = new HashMap<TextEditingController, TextField>();
   void _incrementCount(){
@@ -32,22 +33,19 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
   }
 
 
-  void checkButton(){
-    for(int i =0; i< controllers.length; i++){
-      playerList.add(new player(controllers[i].text, 0, new List<a_card>.empty()));
-      print(controllers[i].text);
+  void checkButton(BuildContext contect){
+    for(int i =1; i< controllers.length; i++){
+      playerList.add(new player(controllers[i].text, 0,0));
     }
-
-    print(playerList.toString());
-    print(playerList[1].getName());
-
+    Navigator.push(contect, MaterialPageRoute(builder: (contect) => GameGUIState()));
   }
   @override
   Widget build(BuildContext contect){
     return Scaffold(
         backgroundColor: Color(0xFFEDECF2),
-        body: SingleChildScrollView(child: Container(
-            margin: EdgeInsets.symmetric(
+        body: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.symmetric(
               vertical: 60,
               horizontal: 30,
             ),
@@ -57,7 +55,7 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
                   delay: 500,
                   child: Container(
                     height: 150,
-                    child: FlutterLogo(size:100),
+                    child: const FlutterLogo(size:100),
                   ),
                 ),
                 DelayedAnimation(
@@ -79,7 +77,7 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
                 DelayedAnimation(
                   delay: 2500,
                   child: Container(
-                    margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     alignment: Alignment.center,
                     height: 50,
                     width: double.infinity,
@@ -115,7 +113,6 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
                     margin: EdgeInsets.all(20),
                     width: double.infinity,
                     child: Column(
-
                       children: getList(nbruser)
                     ),
                   ),
@@ -123,10 +120,10 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
 
                 OutlinedButton.icon(
                   onPressed: () {
-                    checkButton();
+                    checkButton(contect);
                   },
-                  icon: Icon(Icons.check, size: 18),
-                  label: Text("Commencer la partie"),
+                  icon: const Icon(Icons.check, size: 18),
+                  label: const Text("Commencer la partie"),
                 )
               ],
             )
@@ -136,9 +133,9 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
 
   List<Widget> getList(int nbu) {
     if(!controllers.isEmpty) controllers.forEach((element) => element.dispose());
+    controllers.clear();
     controllers = List.generate(nbu+1, (index) => TextEditingController());
     List<Widget> childs = [];
-
     childs.add(Text(errormsg));
     for (var i = 1; i < nbu+1; i++) {
       childs.add(Text('Nom utilisateur : $i'));
@@ -149,7 +146,6 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
         ),
       );
       test.putIfAbsent(controllers[i], () => textf);
-      textList.add(textf);
       childs.add(textf);
     }
     return childs;

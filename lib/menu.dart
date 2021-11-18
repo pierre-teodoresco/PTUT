@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ptut_game/delayed_animation.dart';
 import 'package:ptut_game/game_settings.dart';
@@ -60,6 +61,7 @@ class MainMenu extends StatelessWidget{
                   ),
                   child: Text('Commencer'),
                   onPressed: () {
+                    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
                     Navigator.push(contect, MaterialPageRoute(builder: (contect) => GameMenuSettingsState()));
                   },
                 ),
