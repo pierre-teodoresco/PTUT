@@ -1,0 +1,21 @@
+To do list PTUT:
+
+- Implémenter TOUTES LES CARTES
+- Corriger le fait de : Quand on modoife le nbr de jouer ca change les valeurs
+- Pas de vérifications que les donénes sont rentrés, on peut lancer si la valeur est vide
+- Les bouttons options et règles
+- Rajouter la pop-up "qui a eu la meilleure note de philo", selectionner le prenom
+- Annimation de dé
+- Animation de case
+- Animation d'effet de case.
+- Mettre le nombre de pote
+- Enlever en haut à gauche le nombre de point, il sert à rien.
+- Sur app desactiver l'heure, desactiver HUD de l'OS
+- Faire passer à l'année suivante
+- Faire les règles sur l'app en mode propre
+- Penser à un menu des options, rajouter des options aux réglages (ex : taille de l'écran, son, résolution etc...)
+- Creer un écran de chargement au lancement de l'app
+
+
+- Creer des pions de couleurs, avec des couleurs de base.
+- Rajouter un coté design

@@ -1,9 +1,10 @@
 import 'a_card.dart';
+import '../scheduler/player.dart';
 
-abstract class a_card_classic extends a_card {
+abstract class a_classic_card extends a_card {
   int _point_bm;
 
-  a_card_classic(String name, String description, int id, this._point_bm) : super(name, description, id);
+  a_classic_card(String name, String description, int id, this._point_bm) : super(name, description, id);
 
-  void effect();
+  void effect(player p);
 }

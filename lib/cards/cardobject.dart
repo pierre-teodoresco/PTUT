@@ -4,34 +4,40 @@
 
 import 'dart:convert';
 
-List<Cardobject> cardobjectFromJson(String str) => List<Cardobject>.from(json.decode(str).map((x) => Cardobject.fromJson(x)));
-
-String cardobjectToJson(List<Cardobject> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
 class Cardobject {
-  Cardobject({
-    required this.name,
-    required this.description,
-    required this.type,
-    required this.effect,
-  });
 
-  String name;
-  String description;
-  String type;
-  List<String> effect;
+  late String name,description, type;
+  late List<String>  effect;
+  //late List<a_card> cardList;
 
-  factory Cardobject.fromJson(Map<String, dynamic> json) => Cardobject(
-    name: json["name"],
-    description: json["description"],
-    type: json["type"],
-    effect: List<String>.from(json["effect"].map((x) => x)),
-  );
+  Cardobject(String name, String description, String type, List<String> effect /*List<a_card> cardList*/) {
+    this.name = name;
+    this.description = description;
+    this.type = type;
+    this.effect = effect;
+    //this.cardList = cardList;
+  }
+  String getName() {
+    return name;
+  }
 
-  Map<String, dynamic> toJson() => {
-    "name": name,
-    "description": description,
-    "type": type,
-    "effect": List<dynamic>.from(effect.map((x) => x)),
-  };
+  void setName(String name) {
+    this.name = name;
+  }
+  String getDesc() {
+    return description;
+  }
+
+  void setDesc(String desc) {
+    this.description = desc;
+  }
+
+  List<String> getEffect() {
+    return effect;
+  }
+
+  void setEffect(List<String> eff) {
+    this.effect = eff;
+  }
+
 }

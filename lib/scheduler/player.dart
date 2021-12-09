@@ -3,13 +3,14 @@ import 'package:ptut_game/abstract/a_card.dart';
 class player {
 
   late String name;
-  late int point, pcase;
+  late int point, pcase,annee;
   //late List<a_card> cardList;
 
-  player(String name, int point, int pcase, /*List<a_card> cardList*/) {
+  player(String name, int point, int pcase, int annee /*List<a_card> cardList*/) {
     this.name = name;
     this.point = point;
     this.pcase = pcase;
+    this.annee = annee;
     //this.cardList = cardList;
   }
 
@@ -31,6 +32,14 @@ class player {
 
   int getCase() {
     return pcase;
+  }
+
+  int getAnnee(){
+    return annee;
+  }
+
+  void setAnnee(int annee){
+    this.annee = annee;
   }
 
   void setCase(int pcase) {
