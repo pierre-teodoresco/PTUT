@@ -1,0 +1,7 @@
+Pour les CARTES
+
+type 1 : bonus / malus classique
+type 2 : coin flip
+type 3 : irl
+type 4 : vole de points / autre choses
+type 5 : dé

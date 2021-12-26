@@ -1,0 +1,439 @@
+{
+  "cards": [
+    {
+      "name":"HEURE DE PERMIS",
+      "description":"Daniel vous attend dans sa voiture, lumière tamisée. Vous passez vos meileures heures de conduite à papoter de politique. Comme vous, Daniel adore Patrick Sebastien, un délice.",
+      "type":"1",
+      "effect":[
+        "addpoint-2",
+        "Vous gagnez 2 points."
+      ]
+    },
+    {
+      "name":"VERBES IRREGULIERS",
+      "description":"Vous apprenez vos verbes irréguliers en anglais. Votre voyage en Angleterre se passe à merveille car vous pouvez vous exprimer correctement.",
+      "type":"1",
+      "effect":[
+        "addpoint-1",
+        "Vous gagnez 1 point."
+      ]
+    },
+    {
+      "name":"BIEN MANGE",
+      "description":"Vous avez raté votre petit dejeuner et vous passé la matiné à travailler. Vous vous servez 2 assiettes et êtes en forme toute l'aprem.",
+      "type":"1",
+      "effect":[
+        "addpoint-2",
+        "Vous gagnez 2 points."
+      ]
+    },
+    {
+      "name":"SERIEUX",
+      "description":"Pas un bruit, premier rang",
+      "type":"1",
+      "effect":[
+        "addpoint-1",
+        "Vous gagnez 1 point."
+      ]
+    },
+    {
+      "name":"CORRIGER LA PROF",
+      "description":"En tant que bon elève, vous suivez attentivement le cours et remarquer L'ENORME erreur du prof. Bien vu champion.",
+      "type":"1",
+      "effect":[
+        "addpoint-1",
+        "Vous gagnez 1 point."
+      ]
+    },
+    {
+      "name":"GLAND DE LAIT",
+      "description":"Dent de lait, gland de lait, vous vous sentez revigoré.",
+      "type":"1",
+      "effect":[
+        "addpoint-1",
+        "Vous gagnez 1 point."
+      ]
+    },
+    {
+      "name":"WHERE IS BRYAN ?",
+      "description":"In the kitchen.",
+      "type":"1",
+      "effect":[
+        "removepoint-5",
+        "Vous perdez 5 points."
+      ]
+    },
+    {
+      "name":"TACLE ASSASSIN",
+      "description":"Une grande carrière vous attendait mais ligaments croisés vous connaissez.",
+      "type":"1",
+      "effect":[
+        "removepoint-1",
+        "Vous perdez 1 point et un genou."
+      ]
+    },
+    {
+      "name":"HANDBALL IN THE BALLS",
+      "description":"Ça fait mal. Vous attendrissez les filles.",
+      "type":"1",
+      "effect":[
+        "addpoint-1",
+        "Vous perdez une boule et gagnez 1 point."
+      ]
+    },
+    {
+      "name":"FOND DE LA CLASSE",
+      "description":"Mohamed, Meddy et Abdoul vous aide à developper votre busisness. Vous finissez l'année riche et heureux.",
+      "type":"1",
+      "effect":[
+        "addpoint-3",
+        "Vous gagnez 3 points."
+      ]
+    },
+    {
+      "name":"FAIRE UN BIDE",
+      "description":"Vous êtes visiblement adepte de la blague de trop. Même votre meilleur ami ne vous a pas suivi sur celle-ci.",
+      "type":"1",
+      "effect":[
+        "removepoint-2",
+        "Vous perdez 2 points."
+      ]
+    },
+    {
+      "name":"LUNDI MATIN",
+      "description":"2h de maths suivit de 2h de physique le tout combiné avec une toux et de la fièvre. La delicatesse d'un bon début de semaine.",
+      "type":"1",
+      "effect":[
+        "removepoint-1",
+        "Vous perdez 1 point."
+      ]
+    },
+    {
+      "name":"SE FAIRE CLASHER PAR LA PROF",
+      "description":"Aujourd'hui, vous avez l'esprit taquin , malheuresement pour vous, le prof est aussi en forme.",
+      "type":"1",
+      "effect":[
+        "removepoint-4",
+        "Vous subissez une masterclass et perdez 4 points."
+      ]
+    },
+    {
+      "name":"RADIATEUR EN HIVER",
+      "description":"L'hiver est arrivé et vous habitez dans le nord. Après un combat sanglant avec vos camarades, vous pouvez calinner le saint chauffage.",
+      "type":"1",
+      "effect":[
+        "addpoint-2",
+        "Vous gagnez 2 points."
+      ]
+    },
+    {
+      "name":"OUBLIER LE DEO",
+      "description":"Apparement vous sentez le facochère.",
+      "type":"1",
+      "effect":[
+        "removepoint-2",
+        "Vous perdez 2 points."
+      ]
+    },
+    {
+      "name":"PERIODE EMO",
+      "description":"Faut-il vraiment dire pourquoi... ?",
+      "type":"1",
+      "effect":[
+        "removepoint-2",
+        "Vous perdez 2 points."
+      ]
+    },
+    {
+      "name":"ADDICTION",
+      "description":"Classique mais malheureux. Les ranked en silver vous bouffent votre temps. Vous ne voyez plus vos amis. Vous ne mangez plus avec votre famille. Vous ne dormez plus.",
+      "type":"1",
+      "effect":[
+        "removepoint-3",
+        "Vous perdez logiquement un bon 3 points."
+      ]
+    },
+    {
+      "name":"EX TOXIQUE",
+      "description":"La fille avec qui vous êtes restés pendant deux ans au collège vient vous voir à la sortie du lycée. Tous les soirs. Pendant 2 mois.",
+      "type":"1",
+      "effect":[
+        "removepoint-3",
+        "Vous perdez 3 points."
+      ]
+    },
+    {
+      "name":"PARLER PENDANT LES BLANCS",
+      "description":"Avouer vos bords politiques tandancieux pendant un blanc n'était pas votre meilleure idée.",
+      "type":"1",
+      "effect":[
+        "removepoint-3",
+        "Vous perdez 3 points."
+      ]
+    },
+    {
+      "name":"FARINE D'ANNIVERSAIRE",
+      "description":"C'est votre anniversaire, vous espériez que tout le monde l'avait oublié.. Vous n'avez jamais été aussi blanc.",
+      "type":"1",
+      "effect":[
+        "removepoint-3",
+        "Vous perdez 3 points."
+      ]
+    },
+    {
+      "name":"PLUS AUCUN MOUCHOIR",
+      "description":"Vous ne connaissez que trop bien les chutes du Niagara maintenant.",
+      "type":"1",
+      "effect":[
+        "removepoint-2",
+        "Vous perdez 2 points."
+      ]
+    },
+    {
+      "name":"HAMBURGER FRITE",
+      "description":"Vous débarquez à la cantine et arrpeçevez de bons burgers qui vous attendent bien sagement. Tout le monde arrive à s'en enfiler 3.",
+      "type":"1",
+      "effect":[
+        "addpointall-2",
+        "Tout le monde gagne 2 points. "
+      ]
+    },
+    {
+      "name":"CARTOUCHE QUI FUIT DANS LA TROUSSE",
+      "description":"Rien à dire de plus.",
+      "type":"1",
+      "effect":[
+        "removepoint-1",
+        "Vous perdez 1 point."
+      ]
+    },
+    {
+      "name":"RATEAU",
+      "description":"Dans le couloir, dans la salle d'histoire, dans la cour. Vous ne pouvez vous empêcher de regarder la belle Cassandra. Vous décidez un matin de lui avouer vos sentiments. Elle refuse avec politesse. Vous êtes triste.",
+      "type":"1",
+      "effect":[
+        "removepoint-3",
+        "Vous perdez 3 points."
+      ]
+    },
+    {
+      "name":"ALARME INCENDIE",
+      "description":"Quel dommage, l'alarme sonne en plein DS surprise, le peuple est sauvé.",
+      "type":"1",
+      "effect":[
+        "addpointall-2",
+        "Tout le monde gagne 2 points."
+      ]
+    },
+    {
+      "name":"DS SAMEDI MATIN",
+      "description":"Au lieu de réviser, vous avez consacré votre vendredi soir au seigneur des anneaux version longue. Vous rattrapez votre sommeil sur le partiel du lendemain matin.",
+      "type":"1",
+      "effect":[
+        "removepointall-3",
+        "Tout le monde perd 3 points."
+      ]
+    },
+    {
+      "name":"PET FOIREUX",
+      "description":"Tu sais, nous savons.",
+      "type":"1",
+      "effect":[
+        "removepoint-2",
+        "Vous perdez 2 points, et un slip."
+      ]
+    },
+    {
+      "name":"PROF ABSENT",
+      "description":"Ca fait 15 minutes non ? Tout le monde sort heureux, votre journée est refaite.",
+      "type":"1",
+      "effect":[
+        "addpointall-2",
+        "Tout le monde gagne 2 points."
+      ]
+    },
+    {
+      "name":"BLOCUS",
+      "description":"\"NON NON OUI OUI, PLUS DE FRITES A LA CANTINE\" : telles sont les revendication des lycéens en colère qui manifestent. Ils boquent l'accès aux profs, vous n'avez pas cours.",
+      "type":"1",
+      "effect":[
+        "addpointall-2",
+        "Tout le monde gagne 2 points."
+      ]
+    },
+    {
+      "name":"EDUCATION SEXUELLE",
+      "description":"La SVT c'est pas passionant quand ça parle de cailloux mais alors quand ça parle de ***. Là on est content !",
+      "type":"1",
+      "effect":[
+        "addpointall-3",
+        "Tout le monde gagne 3 points."
+      ]
+    },
+    {
+      "name":"PLUS DE PQ DANS LES CHIOTTES",
+      "description":"Les devoirs de philo auront servit à quelque chose au moins.",
+      "type":"1",
+      "effect":[
+        "removepointall-1",
+        "Tout le monde perd 1 point."
+      ]
+    },
+    {
+      "name":"IL PLEUT.",
+      "description":"Dommage.",
+      "type":"1",
+      "effect":[
+        "removepointall-1",
+        "Tout le monde perd 1 point."
+      ]
+    },
+    {
+      "name":"MENU DEGUEULASSE A LA CANTINE",
+      "description":"Rien ne vaut le brocolis-poisson pas cuit après un dur DS de maths de 4h.",
+      "type":"1",
+      "effect":[
+        "removepointall-2",
+        "Tout le monde perd 2 points."
+      ]
+    },
+    {
+      "name":"CONTROLE SURPRISE",
+      "description":"Le prof a très mal dormi cette nuit. La classe subit son courroux.",
+      "type":"1",
+      "effect":[
+        "removepointall-2",
+        "Tout le monde perd 2 points."
+      ]
+    },
+    {
+      "name":"PROF UN PEU TROP SYMPA",
+      "description":"On l'a tous eu ce prof non ? Tout est dit, il est même un peu trop sympa. Les cours passent vite mais vous ne faites pas grand chose.",
+      "type":"1",
+      "effect":[
+        "removepointall-2",
+        "Tout le monde perd 2 points."
+      ]
+    },
+    {
+      "name":"3x500",
+      "description":"Votre VO2 max ne dépasse pas les 10. Cependant, le prof ne l'a pas remarqué.",
+      "type":"1",
+      "effect":[
+        "removepointall-1",
+        "Tout le monde perd 1 point."
+      ]
+    },
+    {
+      "name":"GASTRO",
+      "description":"Elle frappe sans prévenir, elle vous vient directement de Roberto, un homme pas très propre qui vous refile sa gastro.",
+      "type":"1",
+      "effect":[
+        "addpoint-2",
+        "Points positif, vous évitez le cours de sport et gagnez 2 points !"
+      ]
+    },
+    {
+      "name":"EXPOSE",
+      "description":" Ah ? On avait un exposé ?",
+      "type":"1",
+      "effect":[
+        "removepoint-3",
+        "Vous perdez 3 points !"
+      ]
+    },
+    {
+      "name": "COURRIR LE PLUS VITE",
+      "description": "Des Geox aux pied, vous gagnez toutes les courses de vitesse organisées par votre lycée. Fier et heureux vous gagnez 1 point par nom de coureur que vous pouvez donner (max 5).",
+      "type": "3",
+      "effect": [
+        "irl-5"
+      ]
+    },
+    {
+      "name":"TRICHE",
+      "description":"Votre collègue a bien bien révisé. Vous avez révisé 15 minutes avant: la décision est vite prise. Le prof passe son temps sur Candy Crush, vous gagnez 2 points et volez 2 points au meilleur de la partie.",
+      "type":"4",
+      "effect":[
+        "stealpoint-2",
+        "Vous volez 2 points au meilleur de la partie."
+      ]
+    },
+    {
+      "name":"CONDUITE ACCOMPAGNE",
+      "description":"Habiter loin de la ville n'est pas toujours simple.. Apprenez à devenir un pilote dès votre plus jeune âge.",
+      "type":"5",
+      "effect":[
+        "addpoint-1",
+        "adddice-1",
+        "Vous gagnez 1 point et + 1 au prochain lancer de dé"
+      ]
+    },
+    {
+      "name":"SPORT",
+      "description":"Emma vous demande si vous êtes sportif ? Montrez lui votre corps d'athlète en faisant le plus de pompes possible : Pour chaque 10 pompes effectuées, Vous gagnez 1 point (max 3).",
+      "type":"3",
+      "effect":[
+        "irl-3"
+      ]
+    },
+    {
+      "name":"VELO",
+      "description":"Avec un IMC supérieur à 27, vous décidez de vous reprendre en main. Désormais, vous irez en vélo chaque jour, votre forme s'améliore.",
+      "type":"5",
+      "effect":[
+        "adddice-2",
+        "+2 au prochain lancer de dé."
+      ]
+    },
+    {
+      "name":"VENDREDI SOIR",
+      "description":"C'est VENDREDI SOIR !! Vous allez en boite déterminé à être le champion de la soirée. Tirez une piece, si c'est pile, vous avez DS le lendemain et perdez 3 points. Si c'est face, vous n'avez pas cour et devenez la référence auprès de vos amis et gagnez 2 points",
+      "type":"2",
+      "effect":[
+        "coinflip-3-2"
+      ]
+    },
+    {
+      "name":"1ERE FOIS",
+      "description":"Ce soir est votre 1ère fois. Tirez une piece, si c'est pile tout se passe à merveille, tellement que vous devenez accro. Perdez 2 points, cela empiete sur vos études. Si c'est face cela se passe ni bien ni mal. Vous êtes un nouvel Homme avec d'autres cordes à votre arc et de nouvelles experiences, gagnez 2 points.",
+      "type":"2",
+      "effect":[
+        "coinflip-2-2"
+      ]
+    },
+    {
+      "name":"1ER JOINT",
+      "description":"Odeur du Vélodromme, étape importante. Soirée, boisson, petite herbe de provence. Lancez une pièce qui décidera si oui ou non fumer ce gros dah vous sied à merveille ! + ou - 2 points",
+      "type":"2",
+      "effect":[
+        "coinflip-2-2"
+      ]
+    },
+    {
+      "name":"OPTION THEATRE",
+      "description":"Bon on va pas se le cacher vous faites théâtre pour les points au bac parce que vous galérez en physique. Jouez un suberpe monologue devant vos camarades, ils valideront ou non votre performance. Si vous refusez vous perdez 5 points.",
+      "type":"3",
+      "effect":[
+        "irl-5"
+      ]
+    },
+    {
+      "name":"OPTION CHANT",
+      "description":"Vous êtes passioné de chant, faites un karaoké devant les autres joueurs. Ils décident de vous attribuer ou non le point. Si vous refusez, vous perdez tous vos points, amis, copine et repartez de la case départ.",
+      "type":"3",
+      "effect":[
+        "irl-1",
+        "remove-all"
+      ]
+    },
+    {
+      "name":"GROS KEBAB",
+      "description":"Le maître kebabier vous attend au sein d'un majestueux établissement. Salade, tomate, oignon, la classique. Mensonge : il prend vos pièces avec sa main pleines de gras qu'il replonge immediatement dans le bac à tomate. Lancez une pièce si c'est pile vous ne le supportez pas et passez 1 semaine au lit. Si c'est face, bravo ce kebab vous a rendu plus fort. + ou - 2 points",
+      "type":"3",
+      "effect":[
+        "coinflip-3-2"
+      ]
+    }
+  ]
+}
