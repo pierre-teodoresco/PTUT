@@ -4,13 +4,16 @@
 
 import 'dart:convert';
 
+import 'package:flutter/widgets.dart';
+
 class Cardobject {
 
   late String name,description, type;
   late List<String>  effect;
+  late List<Widget> widgets;
   //late List<a_card> cardList;
 
-  Cardobject(String name, String description, String type, List<String> effect /*List<a_card> cardList*/) {
+  Cardobject(String name, String description, String type, List<String> effect, /*List<a_card> cardList*/) {
     this.name = name;
     this.description = description;
     this.type = type;
@@ -28,6 +31,7 @@ class Cardobject {
     return description;
   }
 
+
   void setDesc(String desc) {
     this.description = desc;
   }
@@ -40,4 +44,11 @@ class Cardobject {
     this.effect = eff;
   }
 
+  List<Widget> getWidget(){
+    return widgets;
+  }
+
+  void setWidget(List<Widget> wid){
+    this.widgets = wid;
+  }
 }
