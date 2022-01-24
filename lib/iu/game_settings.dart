@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 
 class GameMenuSettings extends State<GameMenuSettingsState>{
 
+  
   static List<player> playerList = [];
   int nbruser = 4;
   final int nbusermax = 6;
@@ -24,12 +25,20 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
     setState(() {
       if(nbruser == nbusermax) return;
       nbruser++;
+      print("Joueur actuelle ");
+      for(int i =1; i< controllers.length; i++){
+        print(controllers[i].text);
+      }
     });
   }
   void _decrementCount(){
     setState(() {
       if(nbruser == nbusermin) return;
       nbruser--;
+
+      for(int i =1; i< controllers.length; i++){
+        print(controllers[i].text);
+      }
     });
   }
 
@@ -38,7 +47,7 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
       playerList.add(new player(controllers[i].text, 10,0,0));
     }
 
-    Navigator.push(context, MaterialPageRoute(builder: (contect) => GameGUIState()));
+    Navigator.push(context, MaterialPageRoute(builder: (contect) => GameMenuOrderState()));
     //
   }
 
@@ -50,13 +59,14 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
   }
   @override
   Widget build(BuildContext contect){
+
     return Scaffold(
         backgroundColor: Color(0xFFEDECF2),
         body: SingleChildScrollView(
           child: Container(
-            margin: const EdgeInsets.symmetric(
+            margin:  EdgeInsets.symmetric(
               vertical: 60,
-              horizontal: 30,
+              horizontal: MediaQuery.of(contect).size.width/4,
             ),
             child: Column(
               children:  [
@@ -147,17 +157,21 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
   }
 
   List<Widget> getList(int nbu) {
-
-    controllers.clear();
-    controllers = List.generate(nbu+1, (index) => TextEditingController());
+    for(int i = 1; i < controllers.length; i++){
+      if(controllers[i].text != ""){
+        controllers[i].text = controllers[i].text;
+      }
+    }
     List<Widget> childs = [];
     childs.add(Text(errormsg));
     for (var i = 1; i < nbu+1; i++) {
       childs.add(Text('Nom utilisateur : $i'));
       TextField textf = TextField(
         controller: controllers[i],
-        decoration: InputDecoration(
-          hintText: "Pseudo"
+        decoration: const InputDecoration(
+          icon: Icon(Icons.account_circle_rounded),
+          hintText: "Pseudo",
+          border: OutlineInputBorder()
         ),
       );
       test.putIfAbsent(controllers[i], () => textf);

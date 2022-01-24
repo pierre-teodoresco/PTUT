@@ -30,6 +30,8 @@ class GameGUI extends State<GameGUIState>{
 
   int reponse = 0;
   var reponsemax = "";
+
+
   void _incrementCount(){
     setState(() {
       if(reponse == int.parse(reponsemax)) return;
@@ -43,7 +45,15 @@ class GameGUI extends State<GameGUIState>{
     });
   }
 
-  giveEffect(int cardnumber){
+
+  ///
+  /// \brief Affecte les effets de la carte
+  ///
+  /// Correspond à l'analyse des effect d'une carte en fonction d'id
+  /// Analyse de l'effect pour savoir si il comporte un prefix, sinon renvoi du texte.
+  /// \param cardnumber ID de la carte (dispo JSON)
+  ///
+  void giveEffect(int cardnumber){
     action.clear();
     effectString.clear();
     MainMenu.cardlist[cardnumber].getEffect().forEach((element) {
@@ -51,21 +61,22 @@ class GameGUI extends State<GameGUIState>{
         print("remove de point ..");
         var point = element;
         var pointadd = point.substring(12);
+
+        ///Verifie si on doit set les points à 0 ou lui soustraire des points
         if((GameMenuSettings.playerList[playernb].getPoint()-int.parse(pointadd)) <= 0) GameMenuSettings.playerList[playernb].setPoint(0);
         else GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()+int.parse(pointadd));
-        print(pointadd);
       }else if(element.startsWith("removecase")){
 
       }else if(element.startsWith("addpoint-")){
+        /// Ajout de point au joueur
         var point = element;
         var pointadd = point.substring(9);
         GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()+int.parse(pointadd));
-        print(pointadd);
       }else if(element.startsWith("addpointall-")){
         var point = element;
         var pointadd = point.substring(12);
         GameMenuSettings.playerList.forEach((element) { element.setPoint(element.getPoint()-int.parse(pointadd));});
-        print(pointadd);
+
       }else if(element.startsWith("removepointall-")) {
         var point = element;
         var pointremove = point.substring(15);
@@ -140,6 +151,14 @@ class GameGUI extends State<GameGUIState>{
       }
     });
   }
+
+  ///
+  /// \brief Lance le dé
+  ///
+  /// Lorsque le joueur clique sur le bouton lancer le dé
+  /// On rafraichi la page, pouis on tira au hasard un nombre parmis toutes les cartes de dispo,
+  /// On lui affiche la petite pop up concernant les info necessaire au type de cartes
+  ///
   void _rollDice(){
     setState(() {
       var rng = new Random();
@@ -147,7 +166,6 @@ class GameGUI extends State<GameGUIState>{
       randomimg = random;
       int playernewcase = GameMenuSettings.playerList[playernb].getCase()+random;
       if(playernewcase > 23)  playernewcase = playernewcase-23;
-      print("Il a fait : "+random.toString()+ " Il est actuellement case : "+(playernewcase).toString() +" Case : "+ MyApp.stringList[playernewcase].toString());
       if(MyApp.stringList[playernewcase].startsWith("MYSTERE")){
         var ran = new Random();
         int randomcard = (ran.nextInt(MainMenu.cardlist.length));

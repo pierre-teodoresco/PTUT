@@ -49,19 +49,37 @@ class GameMenuOrder extends State<GameMenuOrderState>{
                   ),
                 ),
 
-                OutlinedButton.icon(
-                  onPressed: () {
-                    //checkButton(contect);
-                  },
-                  icon: const Icon(Icons.check, size: 18),
-                  label: const Text("Commencer la partie"),
-                )
+                Row(
+                  //spacing: 8.0,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Wrap(
+                      spacing: 20.0,
+                      children: studentsName(),
+                    ),
+                  ],
+                ),
               ],
             )
         ),)
     );
   }
 
+
+
+  List<Widget> studentsName(){
+    List<Widget> child = [];
+    for(int i = 0; i < GameMenuSettings.playerList.length; i ++){
+      child.add(OutlinedButton.icon(
+          onPressed: (){
+            GameGUI.playernb = i;
+            Navigator.push(context, MaterialPageRoute(builder: (contect) => GameGUIState()));
+          },
+          icon: Icon(Icons.account_circle_rounded, size:18),
+          label: Text(GameMenuSettings.playerList[i].getName())));
+    }
+    return child;
+  }
 }
 
 

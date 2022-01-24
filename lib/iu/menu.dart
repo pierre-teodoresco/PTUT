@@ -82,6 +82,7 @@ class MainMenu extends StatelessWidget{
                     readJson();
                     print(_card.toString());
                     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
+                    GameMenuSettings().controllers = List.generate(6, (index) => TextEditingController());
                     Navigator.push(contect, MaterialPageRoute(builder: (contect) => GameMenuSettingsState()));
                   },
                 ),
