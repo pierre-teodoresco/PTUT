@@ -183,9 +183,7 @@ class GameGUI extends State<GameGUIState>{
         ++lap;
         if (lap % 2 == 0) {
           ++year;
-          for (player p in GameMenuSettings.playerList) {
-            p.setCase(0);
-          }
+          playernewcase = 0;
         }
         else {
           playernewcase = playernewcase - 23;
