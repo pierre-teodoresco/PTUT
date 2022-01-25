@@ -15,8 +15,6 @@ class MyApp extends StatelessWidget {
   static List<String> stringList = [];
 
   void initCase(){
-
-
     stringList.add("DEPART");
     stringList.add("COURS");
     stringList.add("VACANCES");
