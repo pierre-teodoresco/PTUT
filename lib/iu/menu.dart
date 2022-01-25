@@ -30,7 +30,7 @@ class MainMenu extends StatelessWidget{
     return Scaffold(
       backgroundColor: Color(0xFFEDECF2),
       body: SingleChildScrollView(child: Container(
-        margin: EdgeInsets.symmetric(
+        margin: const EdgeInsets.symmetric(
           vertical: 60,
           horizontal: 30,
         ),
