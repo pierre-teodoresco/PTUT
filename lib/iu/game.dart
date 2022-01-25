@@ -178,7 +178,7 @@ class GameGUI extends State<GameGUIState>{
   }
 
   ///
-  ///  \brief gère l'année globale
+  /// \brief gère l'année globale
   ///
   bool yearManager() {
     int lap = 0;
