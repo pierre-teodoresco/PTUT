@@ -172,7 +172,7 @@ class GameGUI extends State<GameGUIState>{
   /// \brief check la condition de fin de partie à la fin du 6eme tour
   ///
   void gameOver(player p) {
-    if (p.getLap() > 6) {
+    if (p.getLap() >= 6) {
       Navigator.push(context, MaterialPageRoute(builder: (contect) => GameOverGUIState()));
     }
   }
