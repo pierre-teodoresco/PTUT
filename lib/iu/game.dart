@@ -8,10 +8,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ptut_game/iu/game_settings.dart';
 import 'package:ptut_game/iu/menu.dart';
 import 'package:ptut_game/main.dart';
+import 'package:ptut_game/scheduler/player.dart';
+
+import 'gameover.dart';
 
 class GameGUI extends State<GameGUIState>{
 
   static int playernb = 0;
+  int lap = 0;
+  int year = 0;
 
   int randomimg = 1;
 
@@ -153,6 +158,15 @@ class GameGUI extends State<GameGUIState>{
   }
 
   ///
+  /// \brief check la condition de fin de partie au 6eme tour
+  ///
+  void gameOver() {
+    if (lap > 6) {
+      Navigator.push(context, MaterialPageRoute(builder: (contect) => GameOverGUIState()));
+    }
+  }
+
+  ///
   /// \brief Lance le dé
   ///
   /// Lorsque le joueur clique sur le bouton lancer le dé
@@ -165,8 +179,17 @@ class GameGUI extends State<GameGUIState>{
       int random = (rng.nextInt(6) + 1);
       randomimg = random;
       int playernewcase = GameMenuSettings.playerList[playernb].getCase()+random;
-      if(playernewcase > 23)  playernewcase = playernewcase-23;
-      if(MyApp.stringList[playernewcase].startsWith("MYSTERE")){
+      if (playernewcase > 23) {
+        ++lap;
+        if (lap % 2 == 0) {
+          ++year;
+          for (player p in GameMenuSettings.playerList) {
+            p.setCase(0);
+          }
+          playernewcase = playernewcase - 23;
+        }
+      }
+      if (MyApp.stringList[playernewcase].startsWith("MYSTERE")){
         var ran = new Random();
         int randomcard = (ran.nextInt(MainMenu.cardlist.length));
         giveEffect(randomcard);
@@ -377,7 +400,7 @@ class GameGUI extends State<GameGUIState>{
             context: context,
 
             builder: (context){
-              
+
               return Center(
                 child: Material(
                     type: MaterialType.transparency,
