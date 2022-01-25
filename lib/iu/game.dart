@@ -158,11 +158,23 @@ class GameGUI extends State<GameGUIState>{
   }
 
   ///
-  /// \brief check la condition de fin de partie au 6eme tour
+  ///  \brief gère l'année globale
   ///
-  void gameOver() {
-    if (lap > 6) {
-      Navigator.push(context, MaterialPageRoute(builder: (contect) => GameOverGUIState()));
+  bool yearManager() {
+    int lap = 0;
+    for (player p in GameMenuSettings.playerList) {
+      if (p.getLap() >= lap) lap = p.getLap();
+    }
+    if (lap % 2 == 0) {
+      ++year;
+      for (player p in GameMenuSettings.playerList) {
+        p.setCase(0);
+        p.setLap(lap);
+      }
+      return true;
+      // possible gestion carte reglement
+    } else {
+      return false;
     }
   }
 
@@ -180,14 +192,12 @@ class GameGUI extends State<GameGUIState>{
       randomimg = random;
       int playernewcase = GameMenuSettings.playerList[playernb].getCase() + random;
       if (playernewcase > 23) {
-        if (++lap % 2 == 0) {
-          ++year;
-          for (player p in GameMenuSettings.playerList) {
-            p.setCase(0);
-          }
+        GameMenuSettings.playerList[playernb].setLap(GameMenuSettings.playerList[playernb].getLap() + 1);
+        if (yearManager()) {
           playernewcase = 0;
-        } else {
-          playernewcase = playernewcase - 23;
+        }
+        else {
+          playernewcase -= 23;
         }
       }
       if (MyApp.stringList[playernewcase].startsWith("MYSTERE")){
@@ -199,88 +209,88 @@ class GameGUI extends State<GameGUIState>{
             builder: (context){
               return Center(
                 child: Material(
-                  type: MaterialType.transparency,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color(0xFFE63946),
-                    ),
-                    padding: EdgeInsets.all(15),
-                    width: MediaQuery.of(context).size.width*0.30,
-                    height: MediaQuery.of(context).size.height*0.75,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Vous avez fait : "+random.toString(),
-                           style: const TextStyle(
-                            fontSize: 25,
-                            color: Colors.black87,
-                            fontWeight: FontWeight.bold
-                          ),
+                    type: MaterialType.transparency,
+                    child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Color(0xFFE63946),
                         ),
-                        const SizedBox(height: 10,),
-                        const Text(
-                          "MYSTERE ",
-                          style:  TextStyle(
-                              fontSize: 30,
-                              color: Colors.black87,
-                              fontWeight: FontWeight.bold
-                          ),
-                        ),
-                        const Divider(
-                          height: 20,
-                          color: Colors.blueGrey,
-                        ),
-                        Container(
-                            height: MediaQuery.of(context).size.height*0.4,
-                          child: Column(
-                            children: <Widget> [
-                              const SizedBox(height: 15,),
-                              Text(
-                                MainMenu.cardlist[randomcard].getName(),
+                        padding: EdgeInsets.all(15),
+                        width: MediaQuery.of(context).size.width*0.30,
+                        height: MediaQuery.of(context).size.height*0.75,
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text("Vous avez fait : "+random.toString(),
                                 style: const TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              const SizedBox(height: 10,),
+                              const Text(
+                                "MYSTERE ",
+                                style:  TextStyle(
                                     fontSize: 30,
                                     color: Colors.black87,
                                     fontWeight: FontWeight.bold
                                 ),
                               ),
-                              SizedBox(height: 10,),
-                              Text(
-                                MainMenu.cardlist[randomcard].getDesc(),
+                              const Divider(
+                                height: 20,
+                                color: Colors.blueGrey,
+                              ),
+                              Container(
+                                  height: MediaQuery.of(context).size.height*0.4,
+                                  child: Column(
+                                      children: <Widget> [
+                                        const SizedBox(height: 15,),
+                                        Text(
+                                          MainMenu.cardlist[randomcard].getName(),
+                                          style: const TextStyle(
+                                              fontSize: 30,
+                                              color: Colors.black87,
+                                              fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                        SizedBox(height: 10,),
+                                        Text(
+                                          MainMenu.cardlist[randomcard].getDesc(),
+                                          style: const TextStyle(
+                                            fontSize: 22,
+                                            color: Colors.black54,
+                                          ),
+                                        ),
+                                      ]
+                                  )
+                              ),
+
+                              const Divider(
+                                height: 20,
+                                color: Colors.blueGrey,
+                              ),
+                              SizedBox(height: 30,),
+                              const Text(
+                                "Action : ",
                                 style: const TextStyle(
                                   fontSize: 22,
                                   color: Colors.black54,
                                 ),
                               ),
+                              SizedBox(height: 5,),
+                              Row(
+                                children: effectString.map((e) => Text(e, style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black54,
+                                ),)).toList(),
+                              ),
+                              Row(
+                                  children: action
+                              ),
                             ]
-                          )
-                        ),
-
-                        const Divider(
-                          height: 20,
-                          color: Colors.blueGrey,
-                        ),
-                        SizedBox(height: 30,),
-                        const Text(
-                          "Action : ",
-                          style: const TextStyle(
-                            fontSize: 22,
-                            color: Colors.black54,
-                          ),
-                        ),
-                        SizedBox(height: 5,),
-                        Row(
-                          children: effectString.map((e) => Text(e, style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.black54,
-                          ),)).toList(),
-                        ),
-                        Row(
-                          children: action
-                        ),
-                      ]
+                        )
                     )
-                  )
                 ),
               );
             }).then((value) {
@@ -329,11 +339,11 @@ class GameGUI extends State<GameGUIState>{
                                 height: 20,
                                 color: Colors.black54,
                               ),
-                               Container(
+                              Container(
                                   height: MediaQuery.of(context).size.height*0.4,
                                   child: Column(
                                       children: const <Widget> [
-                                         SizedBox(height: 15,),
+                                        SizedBox(height: 15,),
                                         Text(
                                           "Cours",
                                           style: TextStyle(
@@ -367,9 +377,9 @@ class GameGUI extends State<GameGUIState>{
                                 ),
                               ),
                               const Text("Vous gagnez 2 points", style:  TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black54,
-                                ),
+                                fontSize: 18,
+                                color: Colors.black54,
+                              ),
                               )
                             ]
                         )
@@ -386,17 +396,22 @@ class GameGUI extends State<GameGUIState>{
       } else if(MyApp.stringList[playernewcase].startsWith("EXAM")){
         String anneenom = "";
         int pointanne = 0;
-        if(GameMenuSettings.playerList[playernb].getAnnee() == 0){
-          anneenom = "Seconde";
-          pointanne = 3;
-        }else if(GameMenuSettings.playerList[playernb].getAnnee() == 1){
-          anneenom = "Premiere";
-          pointanne = 5;
-        }else if(GameMenuSettings.playerList[playernb].getAnnee() == 2){
-        anneenom = "Terminale";
-        pointanne = 7;
-      }
-        GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()+pointanne);
+        switch(year)
+        {
+          case 1 :
+            anneenom = "Seconde";
+            pointanne = 3;
+            break;
+          case 2 :
+            anneenom = "Premiere";
+            pointanne = 5;
+            break;
+          case 3 :
+            anneenom = "Terminale";
+            pointanne = 7;
+            break;
+        }
+        GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint() + pointanne);
         showDialog(
             context: context,
 
@@ -473,7 +488,7 @@ class GameGUI extends State<GameGUIState>{
                                   color: Colors.black54,
                                 ),
                               ),
-                               Text("Vous gagnez "+pointanne.toString()+" points", style:  TextStyle(
+                              Text("Vous gagnez "+pointanne.toString()+" points", style:  TextStyle(
                                 fontSize: 18,
                                 color: Colors.black54,
                               ),
