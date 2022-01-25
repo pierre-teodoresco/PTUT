@@ -15,7 +15,6 @@ import 'gameover.dart';
 class GameGUI extends State<GameGUIState>{
 
   static int playernb = 0;
-  int lap = 0;
   int year = 1;
 
   int randomimg = 1;
@@ -24,7 +23,7 @@ class GameGUI extends State<GameGUIState>{
     List<TableRow> childs = [];
     for(int i = 0; i< GameMenuSettings.playerList.length; i++){
       childs.add(TableRow(children: [
-          Text(GameMenuSettings.playerList[i].getName()+ " : "+ GameMenuSettings.playerList[i].getPoint().toString()),
+        Text(GameMenuSettings.playerList[i].getName()+ " : "+ GameMenuSettings.playerList[i].getPoint().toString()),
       ]));
     }
     return childs;
@@ -69,7 +68,7 @@ class GameGUI extends State<GameGUIState>{
 
         ///Verifie si on doit set les points à 0 ou lui soustraire des points
         if((GameMenuSettings.playerList[playernb].getPoint()-int.parse(pointadd)) <= 0) GameMenuSettings.playerList[playernb].setPoint(0);
-        else GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()+int.parse(pointadd));
+        else GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()-int.parse(pointadd));
       }else if(element.startsWith("removecase")){
 
       }else if(element.startsWith("addpoint-")){
@@ -89,7 +88,19 @@ class GameGUI extends State<GameGUIState>{
           if ((element.getPoint()-int.parse(pointremove))<= 0) element.setPoint(0);
           else element.setPoint(element.getPoint()-int.parse(pointremove));
         });
-      }else if(element.startsWith("coinflip-")){
+      }else if(element.startsWith("stealpoint-")){
+        var point = element;
+        var pointremove = point.substring(11);
+        var playerMax = GameMenuSettings.playerList[0];
+        GameMenuSettings.playerList.forEach((element) {
+          if(element.getPoint() > element.getPoint()) playerMax = element;
+        });
+        if((playerMax.getPoint()-int.parse(pointremove)) <= 0) GameMenuSettings.playerList[playernb].setPoint(0);
+        else playerMax.setPoint(playerMax.getPoint()-int.parse(pointremove));
+        GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()+int.parse(pointremove));
+
+
+      } else if(element.startsWith("coinflip-")){
         action.add(
             ElevatedButton(
                 onPressed: () {
@@ -142,19 +153,28 @@ class GameGUI extends State<GameGUIState>{
           label: Text("Retirer"),
         ));
         action.add(Text(
-      ' $reponse',
-      ));
+          ' $reponse',
+        ));
         action.add(OutlinedButton.icon(
-      onPressed: () {
+          onPressed: () {
 
-      },
-      icon: Icon(Icons.add, size: 18),
-      label: Text("Ajouter"),
-      ));
+          },
+          icon: Icon(Icons.add, size: 18),
+          label: Text("Ajouter"),
+        ));
       }else{
         effectString.add(element.toString());
       }
     });
+  }
+
+  ///
+  /// \brief check la condition de fin de partie à la fin du 6eme tour
+  ///
+  void gameOver(player p) {
+    if (p.getLap() > 6) {
+      Navigator.push(context, MaterialPageRoute(builder: (contect) => GameOverGUIState()));
+    }
   }
 
   ///
@@ -163,7 +183,9 @@ class GameGUI extends State<GameGUIState>{
   bool yearManager() {
     int lap = 0;
     for (player p in GameMenuSettings.playerList) {
-      if (p.getLap() >= lap) lap = p.getLap();
+      if (p.getLap() >= lap) {
+        lap = p.getLap();
+      }
     }
     if (lap % 2 == 0) {
       ++year;
@@ -175,6 +197,22 @@ class GameGUI extends State<GameGUIState>{
       // possible gestion carte reglement
     } else {
       return false;
+    }
+  }
+
+  ///
+  /// \brief retourne le nom de l'annee correspondante pour l'affichage
+  ///
+  String getYearName() {
+    switch (year) {
+      case 1 :
+        return "Seconde";
+      case 2 :
+        return "Première";
+      case 3 :
+        return "Terminale";
+      default :
+        return "Post-Bac";
     }
   }
 
@@ -193,6 +231,7 @@ class GameGUI extends State<GameGUIState>{
       int playernewcase = GameMenuSettings.playerList[playernb].getCase() + random;
       if (playernewcase > 23) {
         GameMenuSettings.playerList[playernb].setLap(GameMenuSettings.playerList[playernb].getLap() + 1);
+        gameOver(GameMenuSettings.playerList[playernb]);
         if (yearManager()) {
           playernewcase = 0;
         }
@@ -394,21 +433,20 @@ class GameGUI extends State<GameGUIState>{
         });
 
       } else if(MyApp.stringList[playernewcase].startsWith("EXAM")){
-        String anneenom = "";
+        String anneenom = getYearName();
         int pointanne = 0;
         switch(year)
         {
           case 1 :
-            anneenom = "Seconde";
             pointanne = 3;
             break;
           case 2 :
-            anneenom = "Premiere";
             pointanne = 5;
             break;
           case 3 :
-            anneenom = "Terminale";
             pointanne = 7;
+            break;
+          default :
             break;
         }
         GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint() + pointanne);
@@ -517,60 +555,74 @@ class GameGUI extends State<GameGUIState>{
         //color: Color(0xFFF7F4F3),
 
         child: Column(
-          children: [
-            Container(
-              color: Colors.red,
-              width: double.infinity,
-              padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-              height: 66,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Numéro de case : "+GameMenuSettings.playerList[playernb].getCase().toString(),
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
-                        color: Colors.black54,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      )),
-                  Column(
-                    children: [
-                      Container(
-                        child: Text("C'est au tour de ",
-                          textAlign: TextAlign.center,
+            children: [
+              Container(
+                color: Colors.red,
+                width: double.infinity,
+                padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+                height: 66,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Numéro de case : " + GameMenuSettings.playerList[playernb].getCase().toString(),
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.poppins(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        )),
+                    Text("Année : " + getYearName(),
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.poppins(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        )),
+                    Text("Tour : " + GameMenuSettings.playerList[playernb].getLap().toString(),
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.poppins(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        )),
+                    Column(
+                      children: [
+                        Container(
+                          child: Text("C'est au tour de ",
+                            textAlign: TextAlign.center,
 
+                            style: GoogleFonts.poppins(
+                              color: Colors.black54,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                            ),
+
+                          ),
+                        ),
+                        Text(GameMenuSettings.playerList[playernb].getName(),
+                          textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
-                            color: Colors.black54,
+                            color: Colors.grey,
                             fontWeight: FontWeight.bold,
                             fontSize: 22,
                           ),
-
                         ),
-                      ),
-                      Text(GameMenuSettings.playerList[playernb].getName(),
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.poppins(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Text("Vos points : "+GameMenuSettings.playerList[playernb].getPoint().toString(),
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
-                      color: Colors.black54,
-                      fontSize: 18,
-                        fontWeight: FontWeight.bold
+                      ],
                     ),
-                  ),
-                ],
+                    Text("Vos points : "+GameMenuSettings.playerList[playernb].getPoint().toString(),
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                          color: Colors.black54,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Container(
-              color: Colors.red,
-              child: Container(
+              Container(
+                color: Colors.red,
+                child: Container(
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height-100,
                   decoration: BoxDecoration(
@@ -580,29 +632,29 @@ class GameGUI extends State<GameGUIState>{
                     ),
 
                   ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                          onPressed: () {
-                        _rollDice();
-                        },
-                          child: Text('Lancer le dé',
-                            style: GoogleFonts.poppins(
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                            onPressed: () {
+                              _rollDice();
+                            },
+                            child: Text('Lancer le dé',
+                              style: GoogleFonts.poppins(
 
-                              color: Colors.black54,
-                              fontSize: 24,
+                                color: Colors.black54,
+                                fontSize: 24,
                                 fontWeight: FontWeight.bold,
-                            ),
-                          )
-                      )
-                    ]
+                              ),
+                            )
+                        )
+                      ]
+                  ),
                 ),
-              ),
-              
-            ),
 
-            /*Align(
+              ),
+
+              /*Align(
               alignment: Alignment.topLeft,
               child: Container(
                 width: double.infinity/2,
@@ -619,8 +671,8 @@ class GameGUI extends State<GameGUIState>{
               
             )*/
 
-          ]
-          ),
+            ]
+        ),
 
       ),
 
