@@ -180,8 +180,7 @@ class GameGUI extends State<GameGUIState>{
       randomimg = random;
       int playernewcase = GameMenuSettings.playerList[playernb].getCase() + random;
       if (playernewcase > 23) {
-        ++lap;
-        if (lap % 2 == 0) {
+        if (++lap % 2 == 0) {
           ++year;
           for (player p in GameMenuSettings.playerList) {
             p.setCase(0);

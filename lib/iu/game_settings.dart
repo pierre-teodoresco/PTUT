@@ -157,6 +157,8 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
   }
 
   List<Widget> getList(int nbu) {
+    controllers.clear();
+    controllers = List.generate(nbu + 1, (index) => TextEditingController());
     for(int i = 1; i < controllers.length; i++){
       if(controllers[i].text != ""){
         controllers[i].text = controllers[i].text;
@@ -181,7 +183,6 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
     return childs;
   }
 }
-
 
 class GameMenuSettingsState extends StatefulWidget{
   @override
