@@ -61,7 +61,7 @@ class GameGUI extends State<GameGUIState>{
     action.clear();
     effectString.clear();
     MainMenu.cardlist[cardnumber].getEffect().forEach((element) {
-      if(element.startsWith("removepoint-")){
+      if(element.startsWith('removepoint-')){
         print("remove de point ..");
         var point = element;
         var pointadd = point.substring(12);
@@ -69,26 +69,26 @@ class GameGUI extends State<GameGUIState>{
         ///Verifie si on doit set les points à 0 ou lui soustraire des points
         if((GameMenuSettings.playerList[playernb].getPoint()-int.parse(pointadd)) <= 0) GameMenuSettings.playerList[playernb].setPoint(0);
         else GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()-int.parse(pointadd));
-      }else if(element.startsWith("removecase")){
+      }else if(element.startsWith('removecase')){
 
-      }else if(element.startsWith("addpoint-")){
+      }else if(element.startsWith('addpoint-')){
         /// Ajout de point au joueur
         var point = element;
         var pointadd = point.substring(9);
         GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()+int.parse(pointadd));
-      }else if(element.startsWith("addpointall-")){
+      }else if(element.startsWith('addpointall-')){
         var point = element;
         var pointadd = point.substring(12);
         GameMenuSettings.playerList.forEach((element) { element.setPoint(element.getPoint()-int.parse(pointadd));});
 
-      }else if(element.startsWith("removepointall-")) {
+      }else if(element.startsWith('removepointall-')) {
         var point = element;
         var pointremove = point.substring(15);
         GameMenuSettings.playerList.forEach((element) {
           if ((element.getPoint()-int.parse(pointremove))<= 0) element.setPoint(0);
           else element.setPoint(element.getPoint()-int.parse(pointremove));
         });
-      }else if(element.startsWith("stealpoint-")){
+      }else if(element.startsWith('stealpoint-')){
         var point = element;
         var pointremove = point.substring(11);
         var playerMax = GameMenuSettings.playerList[0];
@@ -100,7 +100,7 @@ class GameGUI extends State<GameGUIState>{
         GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()+int.parse(pointremove));
 
 
-      } else if(element.startsWith("coinflip-")){
+      } else if(element.startsWith('coinflip-')){
         action.add(
             ElevatedButton(
                 onPressed: () {
@@ -150,7 +150,7 @@ class GameGUI extends State<GameGUIState>{
             Navigator.pop(context, false);
           },
           icon: Icon(Icons.remove, size: 18),
-          label: Text("Retirer"),
+          label: Text('Retirer'),
         ));
         action.add(Text(
           ' $reponse',
@@ -160,7 +160,7 @@ class GameGUI extends State<GameGUIState>{
 
           },
           icon: Icon(Icons.add, size: 18),
-          label: Text("Ajouter"),
+          label: Text('Ajouter'),
         ));
       }else{
         effectString.add(element.toString());
@@ -173,7 +173,7 @@ class GameGUI extends State<GameGUIState>{
   ///
   void gameOver(player p) {
     if (p.getLap() >= 6) {
-      Navigator.push(context, MaterialPageRoute(builder: (contect) => GameOverGUIState()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => GameOverGUIState()));
     }
   }
 
@@ -206,13 +206,13 @@ class GameGUI extends State<GameGUIState>{
   String getYearName() {
     switch (year) {
       case 1 :
-        return "Seconde";
+        return 'Seconde';
       case 2 :
-        return "Première";
+        return 'Première';
       case 3 :
-        return "Terminale";
+        return 'Terminale';
       default :
-        return "Post-Bac";
+        return 'Post-Bac';
     }
   }
 
@@ -260,7 +260,7 @@ class GameGUI extends State<GameGUIState>{
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Text("Vous avez fait : "+random.toString(),
+                              Text('Vous avez fait : ' + random.toString(),
                                 style: const TextStyle(
                                     fontSize: 25,
                                     color: Colors.black87,
@@ -269,7 +269,7 @@ class GameGUI extends State<GameGUIState>{
                               ),
                               const SizedBox(height: 10,),
                               const Text(
-                                "MYSTERE ",
+                                'MYSTERE ',
                                 style:  TextStyle(
                                     fontSize: 30,
                                     color: Colors.black87,
@@ -311,7 +311,7 @@ class GameGUI extends State<GameGUIState>{
                               ),
                               SizedBox(height: 30,),
                               const Text(
-                                "Action : ",
+                                'Action : ',
                                 style: const TextStyle(
                                   fontSize: 22,
                                   color: Colors.black54,
@@ -339,7 +339,7 @@ class GameGUI extends State<GameGUIState>{
           });
         });
 
-      }else if(MyApp.stringList[playernewcase].startsWith("COURS")){
+      }else if(MyApp.stringList[playernewcase].startsWith('COURS')){
         GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()+2);
         showDialog(
             context: context,
@@ -367,7 +367,7 @@ class GameGUI extends State<GameGUIState>{
                               ),
                               const SizedBox(height: 10,),
                               const Text(
-                                "COURS",
+                                'COURS',
                                 style:  TextStyle(
                                     fontSize: 30,
                                     color: Colors.black87,
@@ -384,7 +384,7 @@ class GameGUI extends State<GameGUIState>{
                                       children: const <Widget> [
                                         SizedBox(height: 15,),
                                         Text(
-                                          "Cours",
+                                          'Cours',
                                           style: TextStyle(
                                               fontSize: 30,
                                               color: Colors.black87,
@@ -393,7 +393,7 @@ class GameGUI extends State<GameGUIState>{
                                         ),
                                         SizedBox(height: 10,),
                                         Text(
-                                          "Vous allez en cours, une journée banale.",
+                                          'Vous allez en cours, une journée banale.',
                                           style: TextStyle(
                                             fontSize: 22,
                                             color: Colors.black54,

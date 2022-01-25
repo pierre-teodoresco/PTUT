@@ -29,7 +29,7 @@ class GameOverGUI extends State<GameOverGUIState> {
                   ),
                   DelayedAnimation(
                     delay: 1200,
-                    child: Text("Gagnant : " + getWinner()),
+                    child: Text('Gagnant : ' + getWinner()),
                   ),
                   DelayedAnimation(
                       delay: 1200,

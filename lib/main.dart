@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:ptut_game/iu/menu.dart';
+import 'package:ptut_game/splash.dart';
 const d_red = const Color(0xFFE98170);
 
 
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Guys and Guys',
       debugShowCheckedModeBanner: false,
-      home: MainMenu(),
+      home: Splash(),
     );
   }
 }

@@ -17,7 +17,7 @@ class MainMenu extends StatelessWidget{
     final String response = await rootBundle.loadString('assets/cards.json');
     final data = await json.decode(response);
       _card = data["cards"];
-    print(_card.length.toString()+" cartes de dispo");
+    print(_card.length.toString() + ' cartes de dispo');
     for(int i = 0; i < _card.length; i++){
       List<String> effect = new List<String>.from(_card[i]["effect"]);
       cardlist.add(new Cardobject( _card[i]["name"],  _card[i]["description"], _card[i]["type"],  effect));
@@ -119,8 +119,8 @@ class MainMenu extends StatelessWidget{
                   ),
                   child: Text('Options'),
                   onPressed: () {
-                    print("Nombre de carte recup : ");
-                        },
+                    print('Nombre de carte recup : ');
+                  },
                 ),
               ),
             ),

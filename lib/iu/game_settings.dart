@@ -25,7 +25,7 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
     setState(() {
       if(nbruser == nbusermax) return;
       nbruser++;
-      print("Joueur actuelle ");
+      print('Joueur actuelle ');
       for(int i =1; i< controllers.length; i++){
         print(controllers[i].text);
       }
@@ -108,7 +108,7 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
                             _decrementCount();
                           },
                           icon: Icon(Icons.remove, size: 18),
-                          label: Text("Retirer"),
+                          label: Text('Retirer'),
                         ),
                          Text(
                           'Nombre de Joueur : $nbruser',
@@ -118,7 +118,7 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
                             _incrementCount();
                           },
                           icon: Icon(Icons.add, size: 18),
-                          label: Text("Ajouter"),
+                          label: Text('Ajouter'),
                         )
                       ],
                     ),
@@ -129,7 +129,7 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
                 child: OutlinedButton.icon(
                     onPressed: _refreshScreen,
                     icon: Icon(Icons.refresh, size:18),
-                    label: Text("Réinitialiser les pseudos")),
+                    label: Text('Réinitialiser les pseudos')),
               ),
                 DelayedAnimation(
 
@@ -148,7 +148,7 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
                     checkButton(contect);
                   },
                   icon: const Icon(Icons.check, size: 18),
-                  label: const Text("Commencer la partie"),
+                  label: const Text('Commencer la partie'),
                 )
               ],
             )
@@ -172,7 +172,7 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
         controller: controllers[i],
         decoration: const InputDecoration(
           icon: Icon(Icons.account_circle_rounded),
-          hintText: "Pseudo",
+          hintText: 'Pseudo',
           border: OutlineInputBorder()
         ),
       );
