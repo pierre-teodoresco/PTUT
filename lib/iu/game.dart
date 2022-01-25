@@ -186,6 +186,8 @@ class GameGUI extends State<GameGUIState>{
           for (player p in GameMenuSettings.playerList) {
             p.setCase(0);
           }
+        }
+        else {
           playernewcase = playernewcase - 23;
         }
       }
