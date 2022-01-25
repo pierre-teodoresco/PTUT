@@ -16,7 +16,7 @@ class GameGUI extends State<GameGUIState>{
 
   static int playernb = 0;
   int lap = 0;
-  int year = 0;
+  int year = 1;
 
   int randomimg = 1;
 
@@ -178,14 +178,16 @@ class GameGUI extends State<GameGUIState>{
       var rng = new Random();
       int random = (rng.nextInt(6) + 1);
       randomimg = random;
-      int playernewcase = GameMenuSettings.playerList[playernb].getCase()+random;
+      int playernewcase = GameMenuSettings.playerList[playernb].getCase() + random;
       if (playernewcase > 23) {
         ++lap;
         if (lap % 2 == 0) {
           ++year;
+          for (player p in GameMenuSettings.playerList) {
+            p.setCase(0);
+          }
           playernewcase = 0;
-        }
-        else {
+        } else {
           playernewcase = playernewcase - 23;
         }
       }
@@ -490,7 +492,7 @@ class GameGUI extends State<GameGUIState>{
         });
 
       }
-      GameMenuSettings.playerList[playernb].setCase(GameMenuSettings.playerList[playernb].getCase() + random);
+      GameMenuSettings.playerList[playernb].setCase(playernewcase);
 
     });
   }
