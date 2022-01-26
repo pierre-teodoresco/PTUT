@@ -58,9 +58,9 @@ class GameOverGUI extends State<GameOverGUIState> {
       ],
     ),);
 
-    List<player> sortedPlayerList = GameMenuSettings.playerList;
+    List<Player> sortedPlayerList = GameMenuSettings.playerList;
     sortedPlayerList.sort((a,b) => b.getPoint().compareTo(a.getPoint()));
-    for (player p in sortedPlayerList) {
+    for (Player p in sortedPlayerList) {
       widgetChildren.add(TableRow(children: [
         Text(p.getName()),
         Text(p.getPoint().toString()),

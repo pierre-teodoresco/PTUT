@@ -6,5 +6,5 @@ abstract class a_classic_card extends a_card {
 
   a_classic_card(String name, String description, int id, this._point_bm) : super(name, description, id);
 
-  void effect(player p);
+  void effect(Player p);
 }

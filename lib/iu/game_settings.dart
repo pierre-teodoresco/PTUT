@@ -12,7 +12,7 @@ import 'package:flutter/services.dart';
 class GameMenuSettings extends State<GameMenuSettingsState>{
 
   
-  static List<player> playerList = [];
+  static List<Player> playerList = [];
   int nbruser = 4;
   final int nbusermax = 6;
   final int nbusermin = 2;
@@ -44,7 +44,7 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
 
   void checkButton(BuildContext contect){
     for(int i =1; i< controllers.length; i++){
-      playerList.add(new player(controllers[i].text, 10,0,0));
+      playerList.add(new Player(controllers[i].text, 10,0,0));
     }
 
     Navigator.push(context, MaterialPageRoute(builder: (contect) => GameMenuOrderState()));
