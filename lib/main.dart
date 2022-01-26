@@ -15,7 +15,7 @@ void main() {
 class MyApp extends StatelessWidget {
   static List<String> stringList = [];
 
-  void initCase(){
+  void initCase() {
     stringList.add("DEPART");
     stringList.add("COURS");
     stringList.add("VACANCES");
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     initCase();
 
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Guys and Guys',
       debugShowCheckedModeBanner: false,
       home: Splash(),

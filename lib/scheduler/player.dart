@@ -5,6 +5,7 @@ class Player {
   late String name;
   late int point, box, lap;
   bool haveGf = false;
+  List<String> mates = [];
 
   Player(this.name, this.point, this.box, this.lap);
 
@@ -48,8 +49,33 @@ class Player {
     this.haveGf = haveGf;
   }
 
+  List<String> getMates() {
+    return mates;
+  }
+
+  void setMates(List<String> mates) {
+    this.mates = mates;
+  }
+
   void addPoint(int point) {
     this.point += point;
+  }
+
+  bool hasMate(String mate) {
+    bool here = false;
+    for (String str in mates) {
+      here = str == mate;
+      if (here) return here;
+    }
+    return here;
+  }
+
+  void addMate(String mate) {
+    mates.add(mate);
+  }
+
+  void removeMate(String mate) {
+    mates.remove(mate);
   }
 
   @override

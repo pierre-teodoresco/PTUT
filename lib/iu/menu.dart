@@ -9,7 +9,6 @@ import 'package:ptut_game/main.dart';
 
 class MainMenu extends StatelessWidget{
 
-
   static List _card = [];
   static List<CardObject> cardlist = [];
 
@@ -50,7 +49,7 @@ class MainMenu extends StatelessWidget{
                   top: 30,
                   bottom: 20,
                 ),
-                child: Text('Application réalisée pour le PTut S3-S3 ',
+                child: Text('Application réalisée pour le PTut S3-S4 ',
                   textAlign: TextAlign.center, 
                   style: GoogleFonts.poppins(color: Colors.grey, fontSize: 15),
                 ),

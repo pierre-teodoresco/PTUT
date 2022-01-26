@@ -10,6 +10,7 @@ import 'package:ptut_game/iu/menu.dart';
 import 'package:ptut_game/main.dart';
 import 'package:ptut_game/scheduler/player.dart';
 
+import '../utils.dart';
 import 'gameover.dart';
 
 class GameGUI extends State<GameGUIState>{
@@ -140,7 +141,7 @@ class GameGUI extends State<GameGUIState>{
                 )
             )
         );
-      }else if(element.startsWith("irl-")){
+      } else if (element.startsWith("irl-")){
 
         var point = element;
         reponsemax = point.substring(4);
@@ -213,16 +214,62 @@ class GameGUI extends State<GameGUIState>{
       for (Player p in GameMenuSettings.playerList) {
         p.setCase(0);
         p.setLap(lap);
+        matesPointManager(p);
       }
       return true;
-      // possible gestion carte reglement
+      // possible gestion carte règlement
     } else {
       return false;
     }
   }
 
   ///
-  /// \brief retourne le nom de l'annee correspondante pour l'affichage
+  /// \brief check si le mate est open
+  ///
+  bool isMateTaken(String mate) {
+    bool taken = false;
+    for (Player p in GameMenuSettings.playerList) {
+      if (p.hasMate(mate)) {
+        taken = true;
+      }
+    }
+    return taken;
+  }
+
+  ///
+  /// \brief trouve le joueur qui possède le pote
+  ///
+  Player whoGotMate(String mate) {
+    for (Player p in GameMenuSettings.playerList) {
+      if (p.hasMate(mate)) {
+        return p;
+      }
+    }
+    return Player("", 0, 0, 0);
+  }
+
+  ///
+  /// \brief manage les potes en les affectant avec verification
+  ///
+  void mateManager(String mate) {
+    if (!isMateTaken(mate)) {
+      GameMenuSettings.playerList[playernb].addMate(mate);
+    } else {
+      // INTRODUIRE SHI FU MI
+      whoGotMate(POTE_1).removeMate(mate);
+      GameMenuSettings.playerList[playernb].addMate(mate);
+    }
+  }
+
+  ///
+  /// \brief manage les points attribuer à la fin de chaque année en fonction des potes
+  ///
+  void matesPointManager(Player p) {
+    p.addPoint(p.getMates().isEmpty ? 0 : p.getMates().length * year);
+  }
+
+  ///
+  /// \brief retourne le nom de l'année correspondante pour l'affichage
   ///
   String getYearName() {
     switch (year) {
@@ -331,10 +378,10 @@ class GameGUI extends State<GameGUIState>{
                                 height: 20,
                                 color: Colors.blueGrey,
                               ),
-                              SizedBox(height: 30,),
+                              const SizedBox(height: 30,),
                               const Text(
                                 'Action : ',
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 22,
                                   color: Colors.black54,
                                 ),
@@ -361,7 +408,7 @@ class GameGUI extends State<GameGUIState>{
           });
         });
 
-      }else if(MyApp.stringList[playernewcase].startsWith('COURS')){
+      } else if(MyApp.stringList[playernewcase].startsWith('COURS')){
         GameMenuSettings.playerList[playernb].addPoint(2);
         showDialog(
             context: context,
@@ -526,7 +573,7 @@ class GameGUI extends State<GameGUIState>{
                                         const SizedBox(height: 10,),
                                         Text(
                                           "Vous êtes actuellement en train de passer un examen de "+anneenom+ ", cela vous rapporte "+pointanne.toString()+ " points",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 22,
                                             color: Colors.black54,
                                           ),
@@ -576,9 +623,9 @@ class GameGUI extends State<GameGUIState>{
                       child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Color(0xFFE84A98),
+                            color: const Color(0xFFE84A98),
                           ),
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           width: MediaQuery.of(context).size.width*0.30,
                           height: MediaQuery.of(context).size.height*0.75,
                           child: Column(
@@ -604,7 +651,7 @@ class GameGUI extends State<GameGUIState>{
                                   height: 20,
                                   color: Colors.black54,
                                 ),
-                                Container(
+                                SizedBox(
                                     height: MediaQuery.of(context).size.height*0.4,
                                     child: Column(
                                         children: const <Widget> [
@@ -633,7 +680,7 @@ class GameGUI extends State<GameGUIState>{
                                   height: 20,
                                   color: Colors.black54,
                                 ),
-                                SizedBox(height: 30,),
+                                const SizedBox(height: 30,),
                                 const Text(
                                   "Action : ",
                                   style:  TextStyle(
@@ -641,7 +688,7 @@ class GameGUI extends State<GameGUIState>{
                                     color: Colors.black54,
                                   ),
                                 ),
-                                Text("Vous gagnez une copine <3 XOXO", style:  TextStyle(
+                                const Text("Vous gagnez une copine <3 XOXO", style:  TextStyle(
                                   fontSize: 18,
                                   color: Colors.black54,
                                 ),
@@ -667,7 +714,7 @@ class GameGUI extends State<GameGUIState>{
                       child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Color(0xFFE84A98),
+                            color: const Color(0xFFE84A98),
                           ),
                           padding: EdgeInsets.all(15),
                           width: MediaQuery.of(context).size.width*0.30,
@@ -723,7 +770,7 @@ class GameGUI extends State<GameGUIState>{
                                   height: 20,
                                   color: Colors.black54,
                                 ),
-                                SizedBox(height: 30,),
+                                const SizedBox(height: 30,),
                                 const Text(
                                   "Action : ",
                                   style:  TextStyle(
@@ -731,7 +778,7 @@ class GameGUI extends State<GameGUIState>{
                                     color: Colors.black54,
                                   ),
                                 ),
-                                Text("Se faire sucer c'est pas tromper...", style:  TextStyle(
+                                const Text("Se faire sucer c'est pas tromper...", style:  TextStyle(
                                   fontSize: 18,
                                   color: Colors.black54,
                                 ),
@@ -748,6 +795,118 @@ class GameGUI extends State<GameGUIState>{
             });
           });
         }
+      } else if (MyApp.stringList[playernewcase].startsWith("POTE")) {
+        String mate;
+        switch (playernewcase) {
+          case 3 :
+            mateManager(POTE_1);
+            mate = POTE_1;
+            break;
+          case 9 :
+            mateManager(POTE_2);
+            mate = POTE_2;
+            break;
+          case 15 :
+            mateManager(POTE_3);
+            mate = POTE_3;
+            break;
+          case 21 :
+            mateManager(POTE_4);
+            mate = POTE_4;
+            break;
+          default :
+            mate = "";
+            break;
+        }
+        showDialog(
+            context: context,
+            builder: (context){
+              return Center(
+                child: Material(
+                    type: MaterialType.transparency,
+                    child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color(0xFF4AE84D)
+                        ),
+                        padding: const EdgeInsets.all(15),
+                        width: MediaQuery.of(context).size.width*0.30,
+                        height: MediaQuery.of(context).size.height*0.75,
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text("Vous avez fait : "+random.toString(),
+                                style: const TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              const SizedBox(height: 10,),
+                              const Text(
+                                'POTE',
+                                style:  TextStyle(
+                                    fontSize: 30,
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              const Divider(
+                                height: 20,
+                                color: Colors.black54,
+                              ),
+                              SizedBox(
+                                  height: MediaQuery.of(context).size.height*0.4,
+                                  child: Column(
+                                      children: <Widget> [
+                                        const SizedBox(height: 15,),
+                                        const Text(
+                                          'Pote',
+                                          style: TextStyle(
+                                              fontSize: 30,
+                                              color: Colors.black87,
+                                              fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                        const SizedBox(height: 10,),
+                                        Text(
+                                          'Trop de la chance, ' + mate + ' est maintenant votre pote !',
+                                          style: const TextStyle(
+                                            fontSize: 22,
+                                            color: Colors.black54,
+                                          ),
+                                        ),
+                                      ]
+                                  )
+                              ),
+                              const Divider(
+                                height: 20,
+                                color: Colors.black54,
+                              ),
+                              const SizedBox(height: 30,),
+                              const Text(
+                                "Action : ",
+                                style:  TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                              const Text("Vous gagnez un pote !", style:  TextStyle(
+                                fontSize: 18,
+                                color: Colors.black54,
+                              ),
+                              )
+                            ]
+                        )
+                    )
+                ),
+              );
+            }).then((value) {
+          setState(() {
+            if(playernb == GameMenuSettings.playerList.length-1) playernb = 0;
+            else playernb++;
+          });
+        });
       }
       GameMenuSettings.playerList[playernb].setCase(playernewcase);
     });

@@ -19,7 +19,7 @@ class _SplashState extends State<Splash> {
     _navigateToHome();
   }
 
-  _navigateToHome()async {
+  _navigateToHome() async {
     await Future.delayed(const Duration(milliseconds: 2500), () {});
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainMenu()));
   }
@@ -47,7 +47,7 @@ class _SplashState extends State<Splash> {
             ),
             child: Text('GUYS AND GUYS ',
               textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(color: Colors.grey, fontSize: 15)
+              style: GoogleFonts.poppins(color: Colors.grey, fontSize: 20)
             ),
           ),
         ),
