@@ -43,26 +43,17 @@ class MainMenu extends StatelessWidget{
                   child: FlutterLogo(size:100),
                 ),
             ),
-            /*DelayedAnimation(
-              delay: 1000,
-              child: Container(
-                height: 400,
-                child: FlutterLogo(size:200),
-              ),
-            ),*/
             DelayedAnimation(
               delay: 1500,
               child: Container(
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   top: 30,
                   bottom: 20,
                 ),
                 child: Text('Application réalisée pour le PTut S3-S3 ',
                   textAlign: TextAlign.center, 
-                  style: GoogleFonts.poppins(
-                      color: Colors.grey,
-                      fontSize: 15,
-                    ),),
+                  style: GoogleFonts.poppins(color: Colors.grey, fontSize: 15),
+                ),
               ),
             ),
             DelayedAnimation(
