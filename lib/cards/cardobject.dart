@@ -2,24 +2,16 @@
 //
 //     final cardobject = cardobjectFromJson(jsonString);
 
-import 'dart:convert';
-
 import 'package:flutter/widgets.dart';
 
-class Cardobject {
+class CardObject {
 
-  late String name,description, type;
-  late List<String>  effect;
+  late String name, description, type;
+  late List<String> effect;
   late List<Widget> widgets;
-  //late List<a_card> cardList;
 
-  Cardobject(String name, String description, String type, List<String> effect, /*List<a_card> cardList*/) {
-    this.name = name;
-    this.description = description;
-    this.type = type;
-    this.effect = effect;
-    //this.cardList = cardList;
-  }
+  CardObject(this.name, this.description, this.type, this.effect);
+
   String getName() {
     return name;
   }
@@ -31,24 +23,23 @@ class Cardobject {
     return description;
   }
 
-
-  void setDesc(String desc) {
-    this.description = desc;
+  void setDesc(String description) {
+    this.description = description;
   }
 
   List<String> getEffect() {
     return effect;
   }
 
-  void setEffect(List<String> eff) {
-    this.effect = eff;
+  void setEffect(List<String> effect) {
+    this.effect = effect;
   }
 
   List<Widget> getWidget(){
     return widgets;
   }
 
-  void setWidget(List<Widget> wid){
-    this.widgets = wid;
+  void setWidget(List<Widget> widgets){
+    this.widgets = widgets;
   }
 }
