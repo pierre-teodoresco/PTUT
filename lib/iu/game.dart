@@ -68,25 +68,25 @@ class GameGUI extends State<GameGUIState>{
 
         ///Verifie si on doit set les points à 0 ou lui soustraire des points
         if((GameMenuSettings.playerList[playernb].getPoint()-int.parse(pointadd)) <= 0) GameMenuSettings.playerList[playernb].setPoint(0);
-        else GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()-int.parse(pointadd));
+        else GameMenuSettings.playerList[playernb].addPoint(-int.parse(pointadd));
       }else if(element.startsWith('removecase')){
 
       }else if(element.startsWith('addpoint-')){
         /// Ajout de point au joueur
         var point = element;
         var pointadd = point.substring(9);
-        GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()+int.parse(pointadd));
+        GameMenuSettings.playerList[playernb].addPoint(int.parse(pointadd));
       }else if(element.startsWith('addpointall-')){
         var point = element;
         var pointadd = point.substring(12);
-        GameMenuSettings.playerList.forEach((element) { element.setPoint(element.getPoint()-int.parse(pointadd));});
+        GameMenuSettings.playerList.forEach((element) { element.addPoint(-int.parse(pointadd));});
 
       }else if(element.startsWith('removepointall-')) {
         var point = element;
         var pointremove = point.substring(15);
         GameMenuSettings.playerList.forEach((element) {
           if ((element.getPoint()-int.parse(pointremove))<= 0) element.setPoint(0);
-          else element.setPoint(element.getPoint()-int.parse(pointremove));
+          else element.addPoint(-int.parse(pointremove));
         });
       }else if(element.startsWith('stealpoint-')){
         var point = element;
@@ -96,8 +96,8 @@ class GameGUI extends State<GameGUIState>{
           if(element.getPoint() > element.getPoint()) playerMax = element;
         });
         if((playerMax.getPoint()-int.parse(pointremove)) <= 0) GameMenuSettings.playerList[playernb].setPoint(0);
-        else playerMax.setPoint(playerMax.getPoint()-int.parse(pointremove));
-        GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()+int.parse(pointremove));
+        else playerMax.addPoint(-int.parse(pointremove));
+        GameMenuSettings.playerList[playernb].addPoint(int.parse(pointremove));
 
 
       } else if(element.startsWith('coinflip-')){
@@ -107,7 +107,7 @@ class GameGUI extends State<GameGUIState>{
                   var point = element;
                   var pointflip = point.substring(9, 10);
                   if((GameMenuSettings.playerList[playernb].getPoint()-int.parse(pointflip)) <= 0) GameMenuSettings.playerList[playernb].setPoint(0);
-                  else GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()+int.parse(pointflip));
+                  else GameMenuSettings.playerList[playernb].addPoint(int.parse(pointflip));
                   Navigator.pop(context, true);
                 },
                 child: Text('Pile',
@@ -125,7 +125,7 @@ class GameGUI extends State<GameGUIState>{
                 onPressed: () {
                   var point = element;
                   var pointflip = point.substring(11, 12);
-                  GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()+int.parse(pointflip));
+                  GameMenuSettings.playerList[playernb].addPoint(int.parse(pointflip));
                   print(pointflip);
 
                   Navigator.pop(context, true);
@@ -174,6 +174,27 @@ class GameGUI extends State<GameGUIState>{
   void gameOver(Player p) {
     if (p.getLap() >= 6) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => GameOverGUIState()));
+    }
+  }
+
+  ///
+  /// \brief effectue le bonus de point lié aux copines à chaque tour
+  ///
+  void gfManager(Player p) {
+    if(p.hasGf()) {
+      switch(year) {
+        case 1 :
+          p.addPoint(3);
+          break;
+        case 2 :
+          p.addPoint(5);
+          break;
+        case 3 :
+          p.addPoint(7);
+          break;
+        default :
+          break;
+      }
     }
   }
 
@@ -231,6 +252,7 @@ class GameGUI extends State<GameGUIState>{
       int playernewcase = GameMenuSettings.playerList[playernb].getCase() + random;
       if (playernewcase > 23) {
         GameMenuSettings.playerList[playernb].setLap(GameMenuSettings.playerList[playernb].getLap() + 1);
+        gfManager(GameMenuSettings.playerList[playernb]);
         gameOver(GameMenuSettings.playerList[playernb]);
         if (yearManager()) {
           playernewcase = 0;
@@ -340,7 +362,7 @@ class GameGUI extends State<GameGUIState>{
         });
 
       }else if(MyApp.stringList[playernewcase].startsWith('COURS')){
-        GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint()+2);
+        GameMenuSettings.playerList[playernb].addPoint(2);
         showDialog(
             context: context,
             builder: (context){
@@ -425,18 +447,17 @@ class GameGUI extends State<GameGUIState>{
                     )
                 ),
               );
-            }).then((value){
+            }).then((value) {
           setState(() {
             if(playernb == GameMenuSettings.playerList.length-1) playernb = 0;
             else playernb++;
           });
         });
 
-      } else if(MyApp.stringList[playernewcase].startsWith("EXAM")){
+      } else if(MyApp.stringList[playernewcase].startsWith("EXAM")) {
         String anneenom = getYearName();
         int pointanne = 0;
-        switch(year)
-        {
+        switch(year) {
           case 1 :
             pointanne = 3;
             break;
@@ -449,7 +470,7 @@ class GameGUI extends State<GameGUIState>{
           default :
             break;
         }
-        GameMenuSettings.playerList[playernb].setPoint(GameMenuSettings.playerList[playernb].getPoint() + pointanne);
+        GameMenuSettings.playerList[playernb].addPoint(pointanne);
         showDialog(
             context: context,
 
@@ -543,9 +564,192 @@ class GameGUI extends State<GameGUIState>{
           });
         });
 
+      } else if (MyApp.stringList[playernewcase].startsWith("COPINE")) {
+          if (!GameMenuSettings.playerList[playernb].hasGf()) {
+          GameMenuSettings.playerList[playernb].setGf(true);
+          showDialog(
+              context: context,
+              builder: (context){
+                return Center(
+                  child: Material(
+                      type: MaterialType.transparency,
+                      child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color(0xFFE84A98),
+                          ),
+                          padding: EdgeInsets.all(15),
+                          width: MediaQuery.of(context).size.width*0.30,
+                          height: MediaQuery.of(context).size.height*0.75,
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Text("Vous avez fait : "+random.toString(),
+                                  style: const TextStyle(
+                                      fontSize: 25,
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                                const SizedBox(height: 10,),
+                                const Text(
+                                  'COPINE',
+                                  style:  TextStyle(
+                                      fontSize: 30,
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                                const Divider(
+                                  height: 20,
+                                  color: Colors.black54,
+                                ),
+                                Container(
+                                    height: MediaQuery.of(context).size.height*0.4,
+                                    child: Column(
+                                        children: const <Widget> [
+                                          SizedBox(height: 15,),
+                                          Text(
+                                            'Copine',
+                                            style: TextStyle(
+                                                fontSize: 30,
+                                                color: Colors.black87,
+                                                fontWeight: FontWeight.bold
+                                            ),
+                                          ),
+                                          SizedBox(height: 10,),
+                                          Text(
+                                            '"Copine à bord, tu perds pas le nord"\nJean de la Fleurette.',
+                                            style: TextStyle(
+                                              fontSize: 22,
+                                              color: Colors.black54,
+                                            ),
+                                          ),
+                                        ]
+                                    )
+                                ),
+
+                                const Divider(
+                                  height: 20,
+                                  color: Colors.black54,
+                                ),
+                                SizedBox(height: 30,),
+                                const Text(
+                                  "Action : ",
+                                  style:  TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                                Text("Vous gagnez une copine <3 XOXO", style:  TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black54,
+                                ),
+                                )
+                              ]
+                          )
+                      )
+                  ),
+                );
+              }).then((value) {
+            setState(() {
+              if(playernb == GameMenuSettings.playerList.length-1) playernb = 0;
+              else playernb++;
+            });
+          });
+        } else {
+          showDialog(
+              context: context,
+              builder: (context){
+                return Center(
+                  child: Material(
+                      type: MaterialType.transparency,
+                      child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color(0xFFE84A98),
+                          ),
+                          padding: EdgeInsets.all(15),
+                          width: MediaQuery.of(context).size.width*0.30,
+                          height: MediaQuery.of(context).size.height*0.75,
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Text("Vous avez fait : "+random.toString(),
+                                  style: const TextStyle(
+                                      fontSize: 25,
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                                const SizedBox(height: 10,),
+                                const Text(
+                                  'COPINE',
+                                  style:  TextStyle(
+                                      fontSize: 30,
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                                const Divider(
+                                  height: 20,
+                                  color: Colors.black54,
+                                ),
+                                Container(
+                                    height: MediaQuery.of(context).size.height*0.4,
+                                    child: Column(
+                                        children: const <Widget> [
+                                          SizedBox(height: 15,),
+                                          Text(
+                                            'Copine',
+                                            style: TextStyle(
+                                                fontSize: 30,
+                                                color: Colors.black87,
+                                                fontWeight: FontWeight.bold
+                                            ),
+                                          ),
+                                          SizedBox(height: 10,),
+                                          Text(
+                                            '"Mesdemoiselles, Mesdames, Messieurs, il n\'existe point châtiment plus cruelle que la tromperie d\'une âme que l\'on aime"\nDaniel Bol D\'avoine.',
+                                            style: TextStyle(
+                                              fontSize: 22,
+                                              color: Colors.black54,
+                                            ),
+                                          ),
+                                        ]
+                                    )
+                                ),
+                                const Divider(
+                                  height: 20,
+                                  color: Colors.black54,
+                                ),
+                                SizedBox(height: 30,),
+                                const Text(
+                                  "Action : ",
+                                  style:  TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                                Text("Se faire sucer c'est pas tromper...", style:  TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black54,
+                                ),
+                                )
+                              ]
+                          )
+                      )
+                  ),
+                );
+              }).then((value) {
+            setState(() {
+              if(playernb == GameMenuSettings.playerList.length-1) playernb = 0;
+              else playernb++;
+            });
+          });
+        }
       }
       GameMenuSettings.playerList[playernb].setCase(playernewcase);
-
     });
   }
   @override

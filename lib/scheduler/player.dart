@@ -40,12 +40,16 @@ class Player {
     this.box = box;
   }
 
-  bool isGf() {
+  bool hasGf() {
     return haveGf;
   }
 
   void setGf(bool haveGf) {
     this.haveGf = haveGf;
+  }
+
+  void addPoint(int point) {
+    this.point += point;
   }
 
   @override
