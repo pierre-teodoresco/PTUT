@@ -171,7 +171,7 @@ class GameGUI extends State<GameGUIState>{
   ///
   /// \brief check la condition de fin de partie à la fin du 6eme tour
   ///
-  void gameOver(player p) {
+  void gameOver(Player p) {
     if (p.getLap() >= 6) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => GameOverGUIState()));
     }
@@ -182,14 +182,14 @@ class GameGUI extends State<GameGUIState>{
   ///
   bool yearManager() {
     int lap = 0;
-    for (player p in GameMenuSettings.playerList) {
+    for (Player p in GameMenuSettings.playerList) {
       if (p.getLap() >= lap) {
         lap = p.getLap();
       }
     }
     if (lap % 2 == 0) {
       ++year;
-      for (player p in GameMenuSettings.playerList) {
+      for (Player p in GameMenuSettings.playerList) {
         p.setCase(0);
         p.setLap(lap);
       }
