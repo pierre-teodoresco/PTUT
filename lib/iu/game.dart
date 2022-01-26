@@ -256,7 +256,7 @@ class GameGUI extends State<GameGUIState>{
       GameMenuSettings.playerList[playernb].addMate(mate);
     } else {
       // INTRODUIRE SHI FU MI
-      whoGotMate(POTE_1).removeMate(mate);
+      whoGotMate(mate).removeMate(mate);
       GameMenuSettings.playerList[playernb].addMate(mate);
     }
   }
