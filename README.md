@@ -12,7 +12,7 @@ Tuteur :
   - CASALI Alain
 
 
-#Date  
+# Date  
 
 - 10 décembre à 16h00 : rendu (dépôt électronique) du rapport préliminaire
 - 16 décembre 21 : soutenances, en présence du tuteur et d'un enseignant auditeur
