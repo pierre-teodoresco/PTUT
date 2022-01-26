@@ -46,7 +46,7 @@ class GameOverGUI extends State<GameOverGUIState> {
   }
 
   String getWinner() {
-    return GameMenuSettings.playerList.reduce((a, b) => a.getPoint() < b.getPoint() ? a : b).getName();
+    return GameMenuSettings.playerList.reduce((a, b) => a.getPoint() > b.getPoint() ? a : b).getName();
   }
 
   List<TableRow> getLeaderBoard() {
