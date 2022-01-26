@@ -11,7 +11,7 @@ class MainMenu extends StatelessWidget{
 
 
   static List _card = [];
-  static List<Cardobject> cardlist = [];
+  static List<CardObject> cardlist = [];
 
   Future<void> readJson() async {
     final String response = await rootBundle.loadString('assets/cards.json');
@@ -20,7 +20,7 @@ class MainMenu extends StatelessWidget{
     print(_card.length.toString() + ' cartes de dispo');
     for(int i = 0; i < _card.length; i++){
       List<String> effect = List<String>.from(_card[i]["effect"]);
-      cardlist.add(Cardobject( _card[i]["name"],  _card[i]["description"], _card[i]["type"],  effect));
+      cardlist.add(CardObject( _card[i]["name"],  _card[i]["description"], _card[i]["type"],  effect));
     }
 
   }
