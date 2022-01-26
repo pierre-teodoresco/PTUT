@@ -19,16 +19,16 @@ class MainMenu extends StatelessWidget{
       _card = data["cards"];
     print(_card.length.toString() + ' cartes de dispo');
     for(int i = 0; i < _card.length; i++){
-      List<String> effect = new List<String>.from(_card[i]["effect"]);
-      cardlist.add(new Cardobject( _card[i]["name"],  _card[i]["description"], _card[i]["type"],  effect));
+      List<String> effect = List<String>.from(_card[i]["effect"]);
+      cardlist.add(Cardobject( _card[i]["name"],  _card[i]["description"], _card[i]["type"],  effect));
     }
 
   }
 
   @override
-  Widget build(BuildContext contect){
+  Widget build(BuildContext context){
     return Scaffold(
-      backgroundColor: Color(0xFFEDECF2),
+      backgroundColor: const Color(0xFFEDECF2),
       body: SingleChildScrollView(child: Container(
         margin: const EdgeInsets.symmetric(
           vertical: 60,
@@ -36,9 +36,9 @@ class MainMenu extends StatelessWidget{
         ),
         child: Column(
           children:  [
-            DelayedAnimation(
+            const DelayedAnimation(
               delay: 500,
-                child: Container(
+                child: SizedBox(
                   height: 150,
                   child: FlutterLogo(size:100),
                 ),
@@ -59,22 +59,22 @@ class MainMenu extends StatelessWidget{
             DelayedAnimation(
               delay: 2500,
               child: Container(
-                margin: EdgeInsets.only(top:20, bottom: 20),
+                margin: const EdgeInsets.only(top:20, bottom: 20),
                 height: 50,
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: d_red,
-                    shape:StadiumBorder(),
-                    padding: EdgeInsets.all(13)
+                    shape:const StadiumBorder(),
+                    padding: const EdgeInsets.all(13)
                   ),
-                  child: Text('Commencer'),
+                  child: const Text('Commencer'),
                   onPressed: () {
                     readJson();
                     print(_card.toString());
                     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
                     GameMenuSettings().controllers = List.generate(6, (index) => TextEditingController());
-                    Navigator.push(contect, MaterialPageRoute(builder: (contect) => GameMenuSettingsState()));
+                    Navigator.push(context, MaterialPageRoute(builder: (builder) => GameMenuSettingsState()));
                   },
                 ),
               ),
@@ -82,16 +82,16 @@ class MainMenu extends StatelessWidget{
             DelayedAnimation(
               delay: 2500,
               child: Container(
-                margin: EdgeInsets.only(top:20, bottom: 20),
+                margin: const EdgeInsets.only(top:20, bottom: 20),
                 height: 50,
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       primary: d_red,
-                      shape:StadiumBorder(),
-                      padding: EdgeInsets.all(13)
+                      shape:const StadiumBorder(),
+                      padding: const EdgeInsets.all(13)
                   ),
-                  child: Text('Règles'),
+                  child: const Text('Règles'),
                   onPressed: () {},
                 ),
               ),
@@ -99,16 +99,16 @@ class MainMenu extends StatelessWidget{
             DelayedAnimation(
               delay: 2500,
               child: Container(
-                margin: EdgeInsets.only(top:20, bottom: 20),
+                margin: const EdgeInsets.only(top:20, bottom: 20),
                 height: 50,
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       primary: d_red,
-                      shape:StadiumBorder(),
-                      padding: EdgeInsets.all(13)
+                      shape: const StadiumBorder(),
+                      padding: const EdgeInsets.all(13)
                   ),
-                  child: Text('Options'),
+                  child: const Text('Options'),
                   onPressed: () {
                     print('Nombre de carte recup : ');
                   },
