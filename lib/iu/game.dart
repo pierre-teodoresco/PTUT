@@ -288,7 +288,7 @@ class GameGUI extends State<GameGUIState>{
   /// \brief Lance le dé
   ///
   /// Lorsque le joueur clique sur le bouton lancer le dé
-  /// On rafraichi la page, pouis on tira au hasard un nombre parmis toutes les cartes de dispo,
+  /// On rafraichi la page, puis on tira au hasard un nombre parmis toutes les cartes de dispo,
   /// On lui affiche la petite pop up concernant les info necessaire au type de cartes
   ///
   void _rollDice(){
@@ -408,7 +408,7 @@ class GameGUI extends State<GameGUIState>{
           });
         });
 
-      } else if(MyApp.stringList[playernewcase].startsWith('COURS')){
+      } else if (MyApp.stringList[playernewcase].startsWith('COURS')) {
         GameMenuSettings.playerList[playernb].addPoint(2);
         showDialog(
             context: context,
