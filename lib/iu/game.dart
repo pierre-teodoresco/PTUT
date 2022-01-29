@@ -10,6 +10,7 @@ import 'package:ptut_game/iu/menu.dart';
 import 'package:ptut_game/main.dart';
 import 'package:ptut_game/scheduler/player.dart';
 
+import '../delayed_animation.dart';
 import '../utils.dart';
 import 'gameover.dart';
 
@@ -65,11 +66,8 @@ class GameGUI extends State<GameGUIState>{
       if(element.startsWith('removepoint-')){
         print("remove de point ..");
         var point = element;
-        var pointadd = point.substring(12);
-
-        ///Verifie si on doit set les points à 0 ou lui soustraire des points
-        if((GameMenuSettings.playerList[playernb].getPoint()-int.parse(pointadd)) <= 0) GameMenuSettings.playerList[playernb].setPoint(0);
-        else GameMenuSettings.playerList[playernb].addPoint(-int.parse(pointadd));
+        var pointremove = point.substring(12);
+        GameMenuSettings.playerList[playernb].removePoint(int.parse(pointremove));
       }else if(element.startsWith('removecase')){
 
       }else if(element.startsWith('addpoint-')){
@@ -80,14 +78,13 @@ class GameGUI extends State<GameGUIState>{
       }else if(element.startsWith('addpointall-')){
         var point = element;
         var pointadd = point.substring(12);
-        GameMenuSettings.playerList.forEach((element) { element.addPoint(-int.parse(pointadd));});
+        GameMenuSettings.playerList.forEach((element) { element.addPoint(int.parse(pointadd));});
 
       }else if(element.startsWith('removepointall-')) {
         var point = element;
         var pointremove = point.substring(15);
         GameMenuSettings.playerList.forEach((element) {
-          if ((element.getPoint()-int.parse(pointremove))<= 0) element.setPoint(0);
-          else element.addPoint(-int.parse(pointremove));
+          element.removePoint(int.parse(pointremove));
         });
       }else if(element.startsWith('stealpoint-')){
         var point = element;
@@ -96,10 +93,8 @@ class GameGUI extends State<GameGUIState>{
         GameMenuSettings.playerList.forEach((element) {
           if(element.getPoint() > element.getPoint()) playerMax = element;
         });
-        if((playerMax.getPoint()-int.parse(pointremove)) <= 0) GameMenuSettings.playerList[playernb].setPoint(0);
-        else playerMax.addPoint(-int.parse(pointremove));
+        playerMax.removePoint(int.parse(pointremove));
         GameMenuSettings.playerList[playernb].addPoint(int.parse(pointremove));
-
 
       } else if(element.startsWith('coinflip-')){
         action.add(
@@ -107,7 +102,7 @@ class GameGUI extends State<GameGUIState>{
                 onPressed: () {
                   var point = element;
                   var pointflip = point.substring(9, 10);
-                  if((GameMenuSettings.playerList[playernb].getPoint()-int.parse(pointflip)) <= 0) GameMenuSettings.playerList[playernb].setPoint(0);
+                  if((GameMenuSettings.playerList[playernb].getPoint() <= int.parse(pointflip))) GameMenuSettings.playerList[playernb].setPoint(0);
                   else GameMenuSettings.playerList[playernb].addPoint(int.parse(pointflip));
                   Navigator.pop(context, true);
                 },
@@ -210,6 +205,7 @@ class GameGUI extends State<GameGUIState>{
       }
     }
     if (lap % 2 == 0) {
+      yearPopUp();
       ++year;
       for (Player p in GameMenuSettings.playerList) {
         p.setCase(0);
@@ -285,6 +281,47 @@ class GameGUI extends State<GameGUIState>{
   }
 
   ///
+  /// \brief affiche une pop up à la fin d'une année qui fait un récap
+  ///
+  void yearPopUp() {
+    showDialog(
+        context: context,
+        builder: (context) {
+            return Center(
+                child: Material(
+                    type: MaterialType.transparency,
+                    child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color(0xFFFFE539),
+                        ),
+                        padding: const EdgeInsets.all(15),
+                        width: MediaQuery.of(context).size.width*0.30,
+                        height: MediaQuery.of(context).size.height*0.75,
+                        child: Column(
+                            children: [
+                              DelayedAnimation(
+                                delay: 1200,
+                                child: Text("L'année de " + getYearName() + " est Terminé"),
+                              ),
+                              DelayedAnimation(
+                                  delay: 1200,
+                                  child: Table(
+                                      border: TableBorder.all(),
+                                      children:
+                                      getLeaderBoard()
+                                  )
+                              ),
+                            ]
+                        )
+                    )
+                )
+            );
+        }
+    );
+  }
+
+  ///
   /// \brief Lance le dé
   ///
   /// Lorsque le joueur clique sur le bouton lancer le dé
@@ -293,7 +330,7 @@ class GameGUI extends State<GameGUIState>{
   ///
   void _rollDice(){
     setState(() {
-      var rng = new Random();
+      var rng = Random();
       int random = (rng.nextInt(6) + 1);
       randomimg = random;
       int playernewcase = GameMenuSettings.playerList[playernb].getCase() + random;
@@ -303,8 +340,7 @@ class GameGUI extends State<GameGUIState>{
         gameOver(GameMenuSettings.playerList[playernb]);
         if (yearManager()) {
           playernewcase = 0;
-        }
-        else {
+        } else {
           playernewcase -= 23;
         }
       }
@@ -520,9 +556,7 @@ class GameGUI extends State<GameGUIState>{
         GameMenuSettings.playerList[playernb].addPoint(pointanne);
         showDialog(
             context: context,
-
             builder: (context){
-
               return Center(
                 child: Material(
                     type: MaterialType.transparency,
@@ -594,7 +628,7 @@ class GameGUI extends State<GameGUIState>{
                                   color: Colors.black54,
                                 ),
                               ),
-                              Text("Vous gagnez "+pointanne.toString()+" points", style:  TextStyle(
+                              Text("Vous gagnez "+pointanne.toString()+" points", style:  const TextStyle(
                                 fontSize: 18,
                                 color: Colors.black54,
                               ),
@@ -613,99 +647,101 @@ class GameGUI extends State<GameGUIState>{
 
       } else if (MyApp.stringList[playernewcase].startsWith("COPINE")) {
           if (!GameMenuSettings.playerList[playernb].hasGf()) {
-          GameMenuSettings.playerList[playernb].setGf(true);
-          showDialog(
-              context: context,
-              builder: (context){
-                return Center(
-                  child: Material(
-                      type: MaterialType.transparency,
-                      child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: const Color(0xFFE84A98),
-                          ),
-                          padding: const EdgeInsets.all(15),
-                          width: MediaQuery.of(context).size.width*0.30,
-                          height: MediaQuery.of(context).size.height*0.75,
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Text("Vous avez fait : "+random.toString(),
-                                  style: const TextStyle(
-                                      fontSize: 25,
-                                      color: Colors.black87,
-                                      fontWeight: FontWeight.bold
+            GameMenuSettings.playerList[playernb].setGf(true);
+            showDialog(
+                context: context,
+                builder: (context){
+                  return Center(
+                    child: Material(
+                        type: MaterialType.transparency,
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color(0xFFE84A98),
+                            ),
+                            padding: const EdgeInsets.all(15),
+                            width: MediaQuery.of(context).size.width*0.30,
+                            height: MediaQuery.of(context).size.height*0.75,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Text("Vous avez fait : "+random.toString(),
+                                    style: const TextStyle(
+                                        fontSize: 25,
+                                        color: Colors.black87,
+                                        fontWeight: FontWeight.bold
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(height: 10,),
-                                const Text(
-                                  'COPINE',
-                                  style:  TextStyle(
-                                      fontSize: 30,
-                                      color: Colors.black87,
-                                      fontWeight: FontWeight.bold
+                                  const SizedBox(height: 10,),
+                                  const Text(
+                                    'COPINE',
+                                    style:  TextStyle(
+                                        fontSize: 30,
+                                        color: Colors.black87,
+                                        fontWeight: FontWeight.bold
+                                    ),
                                   ),
-                                ),
-                                const Divider(
-                                  height: 20,
-                                  color: Colors.black54,
-                                ),
-                                SizedBox(
-                                    height: MediaQuery.of(context).size.height*0.4,
-                                    child: Column(
-                                        children: const <Widget> [
-                                          SizedBox(height: 15,),
-                                          Text(
-                                            'Copine',
-                                            style: TextStyle(
-                                                fontSize: 30,
-                                                color: Colors.black87,
-                                                fontWeight: FontWeight.bold
-                                            ),
-                                          ),
-                                          SizedBox(height: 10,),
-                                          Text(
-                                            '"Copine à bord, tu perds pas le nord"\nJean de la Fleurette.',
-                                            style: TextStyle(
-                                              fontSize: 22,
-                                              color: Colors.black54,
-                                            ),
-                                          ),
-                                        ]
-                                    )
-                                ),
-
-                                const Divider(
-                                  height: 20,
-                                  color: Colors.black54,
-                                ),
-                                const SizedBox(height: 30,),
-                                const Text(
-                                  "Action : ",
-                                  style:  TextStyle(
-                                    fontSize: 22,
+                                  const Divider(
+                                    height: 20,
                                     color: Colors.black54,
                                   ),
-                                ),
-                                const Text("Vous gagnez une copine <3 XOXO", style:  TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black54,
-                                ),
-                                )
-                              ]
-                          )
-                      )
-                  ),
-                );
-              }).then((value) {
-            setState(() {
-              if(playernb == GameMenuSettings.playerList.length-1) playernb = 0;
-              else playernb++;
+                                  SizedBox(
+                                      height: MediaQuery.of(context).size.height*0.4,
+                                      child: Column(
+                                          children: const <Widget> [
+                                            SizedBox(height: 15,),
+                                            Text(
+                                              'Copine',
+                                              style: TextStyle(
+                                                  fontSize: 30,
+                                                  color: Colors.black87,
+                                                  fontWeight: FontWeight.bold
+                                              ),
+                                            ),
+                                            SizedBox(height: 10,),
+                                            Text(
+                                              '"Copine à bord, tu perds pas le nord"\nJean de la Fleurette.',
+                                              style: TextStyle(
+                                                fontSize: 22,
+                                                color: Colors.black54,
+                                              ),
+                                            ),
+                                          ]
+                                      )
+                                  ),
+
+                                  const Divider(
+                                    height: 20,
+                                    color: Colors.black54,
+                                  ),
+                                  const SizedBox(height: 30,),
+                                  const Text(
+                                    "Action : ",
+                                    style:  TextStyle(
+                                      fontSize: 22,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                  const Text("Vous gagnez une copine <3 XOXO", style:  TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black54,
+                                  ),
+                                  )
+                                ]
+                            )
+                        )
+                    ),
+                  );
+                }).then((value) {
+              setState(() {
+                if(playernb == GameMenuSettings.playerList.length-1) playernb = 0;
+                else playernb++;
+              });
             });
-          });
-        } else {
-          showDialog(
+          } else {
+            GameMenuSettings.playerList[playernb].removePoint(2);
+            GameMenuSettings.playerList[playernb].setGf(false);
+            showDialog(
               context: context,
               builder: (context){
                 return Center(
@@ -778,7 +814,7 @@ class GameGUI extends State<GameGUIState>{
                                     color: Colors.black54,
                                   ),
                                 ),
-                                const Text("Se faire sucer c'est pas tromper...", style:  TextStyle(
+                                const Text("Vous perdez 2 points et votre copine même si se faire sucer c'est pas tromper..." , style:  TextStyle(
                                   fontSize: 18,
                                   color: Colors.black54,
                                 ),

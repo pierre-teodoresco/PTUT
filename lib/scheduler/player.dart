@@ -61,6 +61,14 @@ class Player {
     this.point += point;
   }
 
+  void removePoint(int point) {
+    if (this.point > point) {
+      this.point -= point;
+    } else {
+      this.point = 0;
+    }
+  }
+
   bool hasMate(String mate) {
     bool here = false;
     for (String str in mates) {
