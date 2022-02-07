@@ -1016,6 +1016,14 @@ class GameGUI extends State<GameGUIState>{
                           fontWeight: FontWeight.bold
                       ),
                     ),
+                    Text("Vos potes à la compote : "+GameMenuSettings.playerList[playernb].countMates().toString(),
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                          color: Colors.black54,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
                   ],
                 ),
               ),

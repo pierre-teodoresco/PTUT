@@ -53,6 +53,15 @@ class Player {
     return mates;
   }
 
+  int countMates(){
+    int mate = 0;
+    if(mates.isNotEmpty)
+    {
+      return mates.length;
+    }
+    return mate;
+  }
+
   void setMates(List<String> mates) {
     this.mates = mates;
   }
