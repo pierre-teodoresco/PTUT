@@ -53,10 +53,9 @@ class Player {
     return mates;
   }
 
-  int countMates(){
+  int countMates() {
     int mate = 0;
-    if(mates.isNotEmpty)
-    {
+    if(mates.isNotEmpty) {
       return mates.length;
     }
     return mate;

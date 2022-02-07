@@ -18,7 +18,7 @@ class GameGUI extends State<GameGUIState>{
 
   static int playernb = 0;
   int year = 1;
-
+  bool isShifumi = false;
   int randomimg = 1;
 
   List<TableRow> addLeftTable(){
@@ -123,12 +123,10 @@ class GameGUI extends State<GameGUIState>{
                   var pointflip = point.substring(11, 12);
                   GameMenuSettings.playerList[playernb].addPoint(int.parse(pointflip));
                   print(pointflip);
-
                   Navigator.pop(context, true);
                 },
                 child: Text('Face',
                   style: GoogleFonts.poppins(
-
                     color: Colors.black54,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -137,7 +135,6 @@ class GameGUI extends State<GameGUIState>{
             )
         );
       } else if (element.startsWith("irl-")){
-
         var point = element;
         reponsemax = point.substring(4);
         action.add(OutlinedButton.icon(
@@ -153,7 +150,6 @@ class GameGUI extends State<GameGUIState>{
         ));
         action.add(OutlinedButton.icon(
           onPressed: () {
-
           },
           icon: Icon(Icons.add, size: 18),
           label: Text('Ajouter'),
@@ -249,11 +245,14 @@ class GameGUI extends State<GameGUIState>{
   ///
   void mateManager(String mate) {
     if (!isMateTaken(mate)) {
+      isShifumi = false;
       GameMenuSettings.playerList[playernb].addMate(mate);
+    } else if (GameMenuSettings.playerList[playernb] == whoGotMate(mate)){
+      isShifumi = false;
+      return;
     } else {
-      // INTRODUIRE SHI FU MI
-      whoGotMate(mate).removeMate(mate);
-      GameMenuSettings.playerList[playernb].addMate(mate);
+      isShifumi = true;
+      shifumi(mate);
     }
   }
 
@@ -301,11 +300,11 @@ class GameGUI extends State<GameGUIState>{
                         child: Column(
                             children: [
                               DelayedAnimation(
-                                delay: 1200,
+                                delay: 400,
                                 child: Text("L'année de " + getYearName() + " est Terminé"),
                               ),
                               DelayedAnimation(
-                                  delay: 1200,
+                                  delay: 400,
                                   child: Table(
                                       border: TableBorder.all(),
                                       children:
@@ -320,6 +319,133 @@ class GameGUI extends State<GameGUIState>{
         }
     );
   }
+
+void shifumiButton(String mate) {
+    action.clear();
+    action.add(
+       ElevatedButton(
+            onPressed: () {
+              whoGotMate(mate).removePoint(1);
+              whoGotMate(mate).removeMate(mate);
+              GameMenuSettings.playerList[playernb].addMate(mate);
+              Navigator.pop(context, true);
+            },
+            child: Text(GameMenuSettings.playerList[playernb].getName(),
+              style: GoogleFonts.poppins(
+                color: Colors.black54,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+        )
+    );
+    action.add(
+        ElevatedButton(
+            onPressed: () {
+              GameMenuSettings.playerList[playernb].removePoint(2);
+              Navigator.pop(context, true);
+            },
+            child: Text(whoGotMate(mate).getName(),
+              style: GoogleFonts.poppins(
+                color: Colors.black54,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+        )
+    );
+  }
+
+  ///
+  /// \brief lance un shi-fu-mi
+  ///
+  void shifumi(String mate) {
+    shifumiButton(mate);
+    showDialog(
+        context: context,
+        builder: (context){
+          return Center(
+            child: Material(
+                type: MaterialType.transparency,
+                child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xFF4AE84D),
+                    ),
+                    padding: EdgeInsets.all(15),
+                    width: MediaQuery.of(context).size.width*0.30,
+                    height: MediaQuery.of(context).size.height*0.75,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          const SizedBox(height: 10,),
+                          const Text(
+                            'SHI-FU-MI',
+                            style:  TextStyle(
+                                fontSize: 30,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          const Divider(
+                            height: 20,
+                            color: Colors.black54,
+                          ),
+                          Container(
+                              height: MediaQuery.of(context).size.height*0.4,
+                              child: Column(
+                                  children: const <Widget> [
+                                    SizedBox(height: 15,),
+                                    Text(
+                                      'Shi-fu-mi',
+                                      style: TextStyle(
+                                          fontSize: 30,
+                                          color: Colors.black87,
+                                          fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                    SizedBox(height: 10,),
+                                    Text(
+                                      'Jouer un shi-fu-mi',
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        color: Colors.black54,
+                                      ),
+                                    ),
+
+                                  ]
+                              )
+                          ),
+                          const Divider(
+                            height: 20,
+                            color: Colors.black54,
+                          ),
+                          const SizedBox(height: 30,),
+                          const Text(
+                            "Action : ",
+                            style:  TextStyle(
+                              fontSize: 22,
+                              color: Colors.black54,
+                            ),
+                          ),
+                          Center(
+                            child : Row(
+                              children: action
+                            )
+                          )
+                        ]
+                    )
+                )
+            ),
+          );
+        }).then((value) {
+      setState(() {
+        if(playernb == GameMenuSettings.playerList.length-1) playernb = 0;
+        else playernb++;
+      });
+    });
+  }
+
 
   ///
   /// \brief Lance le dé
@@ -938,6 +1064,7 @@ class GameGUI extends State<GameGUIState>{
                 ),
               );
             }).then((value) {
+              if(isShifumi) return;
           setState(() {
             if(playernb == GameMenuSettings.playerList.length-1) playernb = 0;
             else playernb++;
