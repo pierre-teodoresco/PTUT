@@ -446,7 +446,6 @@ void shifumiButton(String mate) {
     });
   }
 
-
   ///
   /// \brief Lance le dé
   ///
@@ -454,12 +453,15 @@ void shifumiButton(String mate) {
   /// On rafraichi la page, puis on tira au hasard un nombre parmis toutes les cartes de dispo,
   /// On lui affiche la petite pop up concernant les info necessaire au type de cartes
   ///
-  void _rollDice(){
+  void _rollDice([int? nbrCase]){
     setState(() {
       var rng = Random();
       int random = (rng.nextInt(6) + 1);
       randomimg = random;
       int playernewcase = GameMenuSettings.playerList[playernb].getCase() + random;
+      if(nbrCase != null) {
+        playernewcase = GameMenuSettings.playerList[playernb].getCase() + nbrCase;
+      }
       if (playernewcase > 23) {
         GameMenuSettings.playerList[playernb].setLap(GameMenuSettings.playerList[playernb].getLap() + 1);
         gfManager(GameMenuSettings.playerList[playernb]);
@@ -470,6 +472,7 @@ void shifumiButton(String mate) {
           playernewcase -= 23;
         }
       }
+      GameMenuSettings.playerList[playernb].setCase(playernewcase);
       if (MyApp.stringList[playernewcase].startsWith("MYSTERE")){
         var ran = new Random();
         int randomcard = (ran.nextInt(MainMenu.cardlist.length));
@@ -569,7 +572,6 @@ void shifumiButton(String mate) {
             else playernb++;
           });
         });
-
       } else if (MyApp.stringList[playernewcase].startsWith('COURS')) {
         GameMenuSettings.playerList[playernb].addPoint(2);
         showDialog(
@@ -772,102 +774,102 @@ void shifumiButton(String mate) {
         });
 
       } else if (MyApp.stringList[playernewcase].startsWith("COPINE")) {
-          if (!GameMenuSettings.playerList[playernb].hasGf()) {
-            GameMenuSettings.playerList[playernb].setGf(true);
-            showDialog(
-                context: context,
-                builder: (context){
-                  return Center(
-                    child: Material(
-                        type: MaterialType.transparency,
-                        child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: const Color(0xFFE84A98),
-                            ),
-                            padding: const EdgeInsets.all(15),
-                            width: MediaQuery.of(context).size.width*0.30,
-                            height: MediaQuery.of(context).size.height*0.75,
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Text("Vous avez fait : "+random.toString(),
-                                    style: const TextStyle(
-                                        fontSize: 25,
-                                        color: Colors.black87,
-                                        fontWeight: FontWeight.bold
-                                    ),
+        if (!GameMenuSettings.playerList[playernb].hasGf()) {
+          GameMenuSettings.playerList[playernb].setGf(true);
+          showDialog(
+              context: context,
+              builder: (context){
+                return Center(
+                  child: Material(
+                      type: MaterialType.transparency,
+                      child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: const Color(0xFFE84A98),
+                          ),
+                          padding: const EdgeInsets.all(15),
+                          width: MediaQuery.of(context).size.width*0.30,
+                          height: MediaQuery.of(context).size.height*0.75,
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Text("Vous avez fait : "+random.toString(),
+                                  style: const TextStyle(
+                                      fontSize: 25,
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.bold
                                   ),
-                                  const SizedBox(height: 10,),
-                                  const Text(
-                                    'COPINE',
-                                    style:  TextStyle(
-                                        fontSize: 30,
-                                        color: Colors.black87,
-                                        fontWeight: FontWeight.bold
-                                    ),
+                                ),
+                                const SizedBox(height: 10,),
+                                const Text(
+                                  'COPINE',
+                                  style:  TextStyle(
+                                      fontSize: 30,
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.bold
                                   ),
-                                  const Divider(
-                                    height: 20,
-                                    color: Colors.black54,
-                                  ),
-                                  SizedBox(
-                                      height: MediaQuery.of(context).size.height*0.4,
-                                      child: Column(
-                                          children: const <Widget> [
-                                            SizedBox(height: 15,),
-                                            Text(
-                                              'Copine',
-                                              style: TextStyle(
-                                                  fontSize: 30,
-                                                  color: Colors.black87,
-                                                  fontWeight: FontWeight.bold
-                                              ),
+                                ),
+                                const Divider(
+                                  height: 20,
+                                  color: Colors.black54,
+                                ),
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.height*0.4,
+                                    child: Column(
+                                        children: const <Widget> [
+                                          SizedBox(height: 15,),
+                                          Text(
+                                            'Copine',
+                                            style: TextStyle(
+                                                fontSize: 30,
+                                                color: Colors.black87,
+                                                fontWeight: FontWeight.bold
                                             ),
-                                            SizedBox(height: 10,),
-                                            Text(
-                                              '"Copine à bord, tu perds pas le nord"\nJean de la Fleurette.',
-                                              style: TextStyle(
-                                                fontSize: 22,
-                                                color: Colors.black54,
-                                              ),
+                                          ),
+                                          SizedBox(height: 10,),
+                                          Text(
+                                            '"Copine à bord, tu perds pas le nord"\nJean de la Fleurette.',
+                                            style: TextStyle(
+                                              fontSize: 22,
+                                              color: Colors.black54,
                                             ),
-                                          ]
-                                      )
-                                  ),
+                                          ),
+                                        ]
+                                    )
+                                ),
 
-                                  const Divider(
-                                    height: 20,
+                                const Divider(
+                                  height: 20,
+                                  color: Colors.black54,
+                                ),
+                                const SizedBox(height: 30,),
+                                const Text(
+                                  "Action : ",
+                                  style:  TextStyle(
+                                    fontSize: 22,
                                     color: Colors.black54,
                                   ),
-                                  const SizedBox(height: 30,),
-                                  const Text(
-                                    "Action : ",
-                                    style:  TextStyle(
-                                      fontSize: 22,
-                                      color: Colors.black54,
-                                    ),
-                                  ),
-                                  const Text("Vous gagnez une copine <3 XOXO", style:  TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black54,
-                                  ),
-                                  )
-                                ]
-                            )
-                        )
-                    ),
-                  );
-                }).then((value) {
-              setState(() {
-                if(playernb == GameMenuSettings.playerList.length-1) playernb = 0;
-                else playernb++;
-              });
+                                ),
+                                const Text("Vous gagnez une copine <3 XOXO", style:  TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black54,
+                                ),
+                                )
+                              ]
+                          )
+                      )
+                  ),
+                );
+              }).then((value) {
+            setState(() {
+              if(playernb == GameMenuSettings.playerList.length-1) playernb = 0;
+              else playernb++;
             });
-          } else {
-            GameMenuSettings.playerList[playernb].removePoint(2);
-            GameMenuSettings.playerList[playernb].setGf(false);
-            showDialog(
+          });
+        } else {
+          GameMenuSettings.playerList[playernb].removePoint(2);
+          GameMenuSettings.playerList[playernb].setGf(false);
+          showDialog(
               context: context,
               builder: (context){
                 return Center(
@@ -957,7 +959,174 @@ void shifumiButton(String mate) {
             });
           });
         }
-      } else if (MyApp.stringList[playernewcase].startsWith("POTE")) {
+      }else if (MyApp.stringList[playernewcase].startsWith("VACANCES")) {
+        showDialog(
+            context: context,
+            builder: (context){
+              return Center(
+                child: Material(
+                    type: MaterialType.transparency,
+                    child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Color(0xFFE0A935),
+                        ),
+                        padding: EdgeInsets.all(15),
+                        width: MediaQuery.of(context).size.width*0.30,
+                        height: MediaQuery.of(context).size.height*0.75,
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text("Vous avez fait : "+random.toString(),
+                                style: const TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              const SizedBox(height: 10,),
+                              const Text(
+                                'VACANCES',
+                                style:  TextStyle(
+                                    fontSize: 30,
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              const Divider(
+                                height: 20,
+                                color: Colors.black54,
+                              ),
+                              Container(
+                                  height: MediaQuery.of(context).size.height*0.4,
+                                  child: Column(
+                                      children: const <Widget> [
+                                        SizedBox(height: 15,),
+                                        Text(
+                                          'Vacances',
+                                          style: TextStyle(
+                                              fontSize: 30,
+                                              color: Colors.black87,
+                                              fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                        SizedBox(height: 10,),
+                                        Text(
+                                          'Ce sont les vacances.',
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            color: Colors.black54,
+                                          ),
+                                        ),
+                                      ]
+                                  )
+                              ),
+                              const Divider(
+                                height: 20,
+                                color: Colors.black54,
+                              ),
+                              SizedBox(height: 30,),
+                              const Text(
+                                "Action : ",
+                                style:  TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                              const Text("Tout le monde en profite, avance de 3 cases et gagne 1 point", style:  TextStyle(
+                                fontSize: 18,
+                                color: Colors.black54,
+                              ),
+                              )
+                            ]
+                        )
+                    )
+                ),
+              );
+            }).then((value) {
+          setState(() {
+            GameMenuSettings.playerList.forEach((element) {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return Center(
+                      child: Material(
+                          type: MaterialType.transparency,
+                          child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Color(0xFFE0A935),
+                              ),
+                              padding: EdgeInsets.all(15),
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width * 0.30,
+                              height: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height * 0.75,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    const SizedBox(height: 10,),
+                                    const Text(
+                                      'VACANCES',
+                                      style: TextStyle(
+                                          fontSize: 30,
+                                          color: Colors.black87,
+                                          fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                    const Divider(
+                                      height: 20,
+                                      color: Colors.black54,
+                                    ),
+                                    Container(
+                                        height: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height * 0.4,
+                                        child: Column(
+                                            children: <Widget>[
+                                              const SizedBox(height: 15,),
+                                              Text(
+                                                'Joueur : ' + element.getName(),
+                                                style: const TextStyle(
+                                                    fontSize: 30,
+                                                    color: Colors.black87,
+                                                    fontWeight: FontWeight.bold
+                                                ),
+                                              ),
+                                              const SizedBox(height: 10,),
+                                              Text(
+                                                'Vous sauter jusqu\'à la case : ' +
+                                                    (element.getCase() + 3)
+                                                        .toString(),
+                                                style: const TextStyle(
+                                                  fontSize: 22,
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                            ]
+                                        )
+                                    ),
+                                    const Divider(
+                                      height: 20,
+                                      color: Colors.black54,
+                                    ),
+                                  ]
+                              )
+                          )
+                      ),
+                    );
+                  });
+              element.addPoint(1);
+              _rollDice(3);
+              --playernb;
+            }); }); });
+      }
+      else if (MyApp.stringList[playernewcase].startsWith("POTE")) {
         String mate;
         switch (playernewcase) {
           case 3 :
@@ -988,8 +1157,8 @@ void shifumiButton(String mate) {
                     type: MaterialType.transparency,
                     child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: const Color(0xFF4AE84D)
+                            borderRadius: BorderRadius.circular(10),
+                            color: const Color(0xFF4AE84D)
                         ),
                         padding: const EdgeInsets.all(15),
                         width: MediaQuery.of(context).size.width*0.30,
@@ -997,7 +1166,7 @@ void shifumiButton(String mate) {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Text("Vous avez fait : "+random.toString(),
+                              Text("Vous avez fait : "+ random.toString(),
                                 style: const TextStyle(
                                     fontSize: 25,
                                     color: Colors.black87,
@@ -1064,16 +1233,16 @@ void shifumiButton(String mate) {
                 ),
               );
             }).then((value) {
-              if(isShifumi) return;
+          if(isShifumi) return;
           setState(() {
             if(playernb == GameMenuSettings.playerList.length-1) playernb = 0;
             else playernb++;
           });
         });
       }
-      GameMenuSettings.playerList[playernb].setCase(playernewcase);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
