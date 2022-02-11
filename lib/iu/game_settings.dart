@@ -1,17 +1,15 @@
 import 'dart:collection';
-import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ptut_game/delayed_animation.dart';
-import 'package:ptut_game/iu/game.dart';
 import 'package:ptut_game/iu/game_order.dart';
 import 'package:ptut_game/scheduler/player.dart';
-import 'package:flutter/services.dart';
+
 
 class GameMenuSettings extends State<GameMenuSettingsState>{
 
-  
   static List<Player> playerList = [];
   int nbruser = 4;
   final int nbusermax = 6;
@@ -20,7 +18,7 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
   String errormsg = "";
   List<TextEditingController> controllers= [];
 
-  HashMap test = new HashMap<TextEditingController, TextField>();
+  HashMap test = HashMap<TextEditingController, TextField>();
   void _incrementCount(){
     setState(() {
       if(nbruser == nbusermax) return;
@@ -37,20 +35,21 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
       nbruser--;
 
       for(int i =1; i< controllers.length; i++){
-        print(controllers[i].text);
+        if (kDebugMode) {
+          print(controllers[i].text);
+        }
       }
     });
   }
 
   void checkButton(BuildContext contect){
     for(int i =1; i< controllers.length; i++){
-      playerList.add(new Player(controllers[i].text, 10,0,0));
+      playerList.add(Player(controllers[i].text, 10,0,0));
     }
 
     Navigator.push(context, MaterialPageRoute(builder: (contect) => GameMenuOrderState()));
     //
   }
-
 
   void _refreshScreen(){
     setState((){
@@ -58,23 +57,22 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
     });
   }
   @override
-  Widget build(BuildContext contect){
-
+  Widget build(BuildContext context){
     return Scaffold(
-        backgroundColor: Color(0xFFEDECF2),
+        backgroundColor: const Color(0xFFEDECF2),
         body: SingleChildScrollView(
           child: Container(
             margin:  EdgeInsets.symmetric(
               vertical: 60,
-              horizontal: MediaQuery.of(contect).size.width/4,
+              horizontal: MediaQuery.of(context).size.width/4,
             ),
             child: Column(
               children:  [
                 DelayedAnimation(
                   delay: 500,
-                  child: Container(
-                    height: 150,
-                    child: const FlutterLogo(size:100),
+                  child: SizedBox(
+                    height: 200,
+                    child: Image.asset('../assets/Logo.png'),
                   ),
                 ),
                 DelayedAnimation(
@@ -111,7 +109,7 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
                           label: Text('Retirer'),
                         ),
                          Text(
-                          'Nombre de Joueur : $nbruser',
+                          '   Nombre de Joueur : $nbruser   ',
                         ),
                         OutlinedButton.icon(
                           onPressed: () {
@@ -145,7 +143,7 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
 
                 OutlinedButton.icon(
                   onPressed: () {
-                    checkButton(contect);
+                    checkButton(context);
                   },
                   icon: const Icon(Icons.check, size: 18),
                   label: const Text('Commencer la partie'),
@@ -167,7 +165,7 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
     List<Widget> childs = [];
     childs.add(Text(errormsg));
     for (var i = 1; i < nbu+1; i++) {
-      childs.add(Text('Nom utilisateur : $i'));
+      childs.add(Text('Joueur : $i'));
       TextField textf = TextField(
         controller: controllers[i],
         decoration: const InputDecoration(
@@ -177,7 +175,6 @@ class GameMenuSettings extends State<GameMenuSettingsState>{
         ),
       );
       test.putIfAbsent(controllers[i], () => textf);
-
       childs.add(textf);
     }
     return childs;

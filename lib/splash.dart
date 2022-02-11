@@ -26,32 +26,16 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:  [
-          const DelayedAnimation(
-          delay: 250,
-          child: SizedBox(
-            height: 150,
-            child: FlutterLogo(size:100),
-          ),
-        ),
-        DelayedAnimation(
-          delay: 500,
-          child: Container(
-            margin: const EdgeInsets.only(
-              top: 30,
-              bottom: 20,
-            ),
-            child: Text('GUYS AND GUYS ',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(color: Colors.grey, fontSize: 20)
-            ),
-          ),
-        ),
-      ]),
-    ));
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Center(
+          child: DelayedAnimation(
+              delay: 250,
+              child: Image.asset('../assets/Logo.png')
+          )
+        ), //   <-- image
+      ),
+    );
   }
 }
